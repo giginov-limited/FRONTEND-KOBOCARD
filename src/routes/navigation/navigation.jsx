@@ -1,9 +1,18 @@
 import React, {Fragment} from 'react';
-import {Outlet, Link} from 'react-router-dom'
-import Footer from '../footer/footer'
+import {Outlet, Link, useNavigate} from 'react-router-dom'
 import './navigation.style.scss'
 
 const Navigation =() => {
+  const navigate = useNavigate();
+
+  const navigateToSignInPage = ()=>{
+    navigate('/sign-in')
+  }
+
+  const navigateToSignUpPage = ()=>{
+    navigate('/sign-up')
+  }
+
   return(
 
     <Fragment>
@@ -19,10 +28,10 @@ const Navigation =() => {
       <div className='end-links'>
           <input type='text' placeholder='search...' className="search-box"/>
          <div>
-          <button className="login-class">
+          <button onClick={navigateToSignInPage} className="login-class">
             login
           </button>
-          <button className='create-account'>
+          <button onClick={navigateToSignUpPage} className='create-account'>
            Create Account
           </button>
          </div>
