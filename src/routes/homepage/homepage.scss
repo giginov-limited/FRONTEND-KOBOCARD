@@ -1,0 +1,25 @@
+.homepage-1 {
+  height: 100vh;
+  width: 100%;
+}
+
+.background-image{
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: flex;
+   flex-direction: column;
+   height: 258px;
+   width: 100%;
+   left: 0px;
+   top: 0px;
+   border-radius: 0px;
+   color: #fff;
+   text-align: right;
+
+   .txt{
+     align-self: flex-end;
+     text-align: center;
+     width: 350px;
+     height: 200px;
+   }
+}
