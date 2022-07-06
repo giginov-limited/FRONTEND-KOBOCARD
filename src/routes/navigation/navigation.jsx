@@ -1,5 +1,6 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import {Outlet, Link, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux/es/exports';
 import './navigation.style.scss'
 
 const Navigation =() => {
@@ -12,6 +13,15 @@ const Navigation =() => {
   const navigateToSignUpPage = ()=>{
     navigate('/sign-up')
   }
+
+  const user = useSelector((state)=> state.auth.user)
+
+  const [dropdownToggle, setDropdownToggle] = useState(false)
+
+  const setDropdown=()=>{
+    setDropdownToggle(!dropdownToggle);
+  }
+
 
   return(
 
@@ -27,6 +37,17 @@ const Navigation =() => {
       </div>
       <div className='end-links'>
           <input type='text' placeholder='search...' className="search-box"/>
+          {
+            user?(
+         <div>
+          <button onClick={navigateToSignInPage} className="wallet-class">
+            Wallet
+          </button>
+          <button onClick={setDropdown} className='profile-pic'>
+           Image
+          </button>
+         </div>) :
+             (
          <div>
           <button onClick={navigateToSignInPage} className="login-class">
             login
@@ -34,9 +55,11 @@ const Navigation =() => {
           <button onClick={navigateToSignUpPage} className='create-account'>
            Create Account
           </button>
-         </div>
+         </div>)
+          }
       </div>
       </div>
+      {dropdownToggle ? <div className='dropdown'>the dropdown</div> : null}
       <Outlet />
    </Fragment>
   )

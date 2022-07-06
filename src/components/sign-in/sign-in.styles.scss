@@ -1,25 +1,20 @@
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-.sign-up-page{
-  display: flex;
-  justify-content: center;
-  height: 100vh;
+.sign-in-page{
+  height: calc(100% - 68px);
   background: #E5E5E5;
   text-align: center;
+  padding-top: 100px;
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
 
-  .sign-up-container{
+  .sign-in-container{
     padding: 10px;
-    position: relative;
-    top: 5%;
     background: #fff;
     border-radius: 10px;
     width:600px;
+    height: 550px;
     display: flex;
     flex-direction:column;
-    justify-content: center;
 
     h2{
       font-size: 48px;
@@ -44,7 +39,7 @@
         background: #C4C4C4;
         border: none;
         border-radius: 5px;
-        padding: 5px;
+        padding: 2px;
         font-size: 20px;
         }
 
@@ -52,15 +47,32 @@
           outline: none;
         }
       }
+
+      button{
+        margin: 20px;
+        align-self: center;
+        background-color: #40c463;
+        color: #fff;
+        font-size: 16px;
+        padding: 5px 0;
+        width: 200px;
+        border: none;
+        border-radius: 5px;
+      }
+
+      button:hover{
+        background-color:#216e39;;
+      }
+
+      span{
+        align-self: flex-start;
+        cursor: pointer;
+      }
     }
-
-
-          button{
-            margin: 20px;
-            align-self: center;
-            font-size: 16px;
-            padding: 5px 0;
-            width: 200px;
-          }
+    .error{
+      font-style: italic;
+      font-size: 10px;
+      color: red;
+   }
   }
 }

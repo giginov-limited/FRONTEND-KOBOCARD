@@ -7,6 +7,8 @@ import Footer from './routes/footer/footer'
 import SignUp from './components/sign-up/sign-up.component.jsx'
 import SignIn from './components/sign-in/sign-in.component.jsx'
 import SignInWithPhoneNumber from './components/sign-in/sign-in-PhoneNum.component'
+import RequireAuth from './features/RequireAuth'
+import LoginPage from './components/login-page/loginPage';
 
 function App() {
   return (
@@ -18,6 +20,10 @@ function App() {
            <Route path='sign-up' element ={<SignUp />} />
            <Route path='sign-in' element ={<SignIn />} />
            <Route path='SignInWithPhoneNumber' element ={<SignInWithPhoneNumber />} />
+
+           <Route element={<RequireAuth />}>
+            <Route path='welcome' element={<LoginPage />} />
+           </Route>
            </Route>
          </Routes>
        </div>

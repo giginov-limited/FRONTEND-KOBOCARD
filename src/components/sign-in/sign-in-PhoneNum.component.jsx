@@ -44,10 +44,9 @@ const SignInWithPhoneNumber = () => {
     navigate('/sign-in')
   }
   return(
-    <div className='sign-up-page'>
-    <div className='sign-up-container'>
+    <div className='sign-in-page'>
+    <div className='sign-in-container'>
       <h2>Sign in</h2>
-      <button onClick={navigateToSignInWithEmail}>login with email</button>
    <form className='form-styles' onSubmit={handleSubmit}>
 
     <div className='inputs'>
@@ -59,6 +58,8 @@ const SignInWithPhoneNumber = () => {
    <label>Password</label>
    <input type="password" required onChange={handleChange} name="password" value={password}/>
    </div>
+
+   <span onClick={navigateToSignInWithEmail}>login with email</span><br/>
 
    <button  type="submit"> login </button>
    </form>
