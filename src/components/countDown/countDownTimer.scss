@@ -1,0 +1,29 @@
+.countdown-timer {
+    width: 100%;
+    background: #C4C4C44F;
+    padding: 20px 0;
+
+    font-family: 'Oswald';
+    font-size: 30px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .countdown-text{
+        font-weight: 400;
+    }
+    
+    .countdown-timers{
+        display: flex;
+
+        .countdown{
+            display: flex;
+            flex-direction: column;
+            margin: 0 20px;
+            background: #EFCECE;
+            border-radius: 5px;
+            padding: 15px;
+        }
+    }
+}

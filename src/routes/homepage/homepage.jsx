@@ -1,7 +1,7 @@
 import {Outlet} from 'react-router-dom';
 import './homepage.scss'
 import Navigation from '../navigation/navigation'
-import Footer from '../footer/footer'
+import CountdownTimer from '../../components/countDown/countdown-timer';
 
 const Home = () => {
   return(
@@ -17,6 +17,7 @@ const Home = () => {
      <h1>WINNING BIG<br/> STARTS WITH<br/> KOBOCARD</h1>
      </div>
     </div>
+    <CountdownTimer CountdownTimestampMs={1660462547000}/>
     <Outlet />
     </div>
   )

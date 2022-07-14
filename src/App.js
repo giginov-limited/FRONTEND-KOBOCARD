@@ -9,6 +9,7 @@ import SignIn from './components/sign-in/sign-in.component.jsx'
 import SignInWithPhoneNumber from './components/sign-in/sign-in-PhoneNum.component'
 import RequireAuth from './features/RequireAuth'
 import LoginPage from './components/login-page/loginPage';
+import AccountPage from './routes/user/accountPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
            <Route element={<RequireAuth />}>
             <Route path='welcome' element={<LoginPage />} />
+            <Route path='account-page' element={<AccountPage />} />
            </Route>
            </Route>
          </Routes>

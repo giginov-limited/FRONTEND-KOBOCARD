@@ -2,10 +2,13 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  display: grid;
-  grid-template-rows: 5fr 1fr;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;  
+}
 
-  
+.wrapper{
+  min-height: 100vh;
 }
 

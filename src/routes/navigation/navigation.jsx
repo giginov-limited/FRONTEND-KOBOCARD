@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {Outlet, Link, useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux/es/exports';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { logOut } from '../../features/authSlice';
 import './navigation.style.scss'
 
 const Navigation =() => {
@@ -22,6 +23,14 @@ const Navigation =() => {
     setDropdownToggle(!dropdownToggle);
   }
 
+  const dispatch = useDispatch();
+
+  const logOuthandler = () => {
+     dispatch(logOut())
+  }
+
+  const navigateToAccountPage = () => navigate('/account-page')
+
 
   return(
 
@@ -39,13 +48,21 @@ const Navigation =() => {
           <input type='text' placeholder='search...' className="search-box"/>
           {
             user?(
-         <div>
+         <div className='buttons'>
           <button onClick={navigateToSignInPage} className="wallet-class">
             Wallet
           </button>
-          <button onClick={setDropdown} className='profile-pic'>
+          <div onClick={setDropdown} className='profile-pic'>
            Image
-          </button>
+          {dropdownToggle ? <div className='dropdown'>
+            <ul>
+              <li onClick={navigateToAccountPage}>Account</li>
+              <li>Draw history</li>
+              <li>Support</li>
+              <li onClick={logOuthandler}> Log Out</li>
+            </ul>
+          </div> : null}
+          </div>
          </div>) :
              (
          <div>
@@ -59,7 +76,6 @@ const Navigation =() => {
           }
       </div>
       </div>
-      {dropdownToggle ? <div className='dropdown'>the dropdown</div> : null}
       <Outlet />
    </Fragment>
   )

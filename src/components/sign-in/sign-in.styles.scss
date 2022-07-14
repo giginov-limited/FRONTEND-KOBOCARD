@@ -1,18 +1,18 @@
 .sign-in-page{
-  height: calc(100% - 68px);
   background: #E5E5E5;
   text-align: center;
-  padding-top: 100px;
+  height: 100vh;
   display: flex;
   flex-direction:row;
   justify-content: center;
+  align-items: center;
 
   .sign-in-container{
     padding: 10px;
     background: #fff;
     border-radius: 10px;
     width:600px;
-    height: 550px;
+    height: 350px;
     display: flex;
     flex-direction:column;
 

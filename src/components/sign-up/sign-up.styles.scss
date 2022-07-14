@@ -1,12 +1,12 @@
 
 .sign-up-page{
-  height: calc(100% - 68px);
   background: #E5E5E5;
   text-align: center;
-  padding-top: 100px;
+  height: 100vh;
   display: flex;
   flex-direction:row;
   justify-content: center;
+  align-items: center;
 
   .sign-up-container{
     padding: 10px;

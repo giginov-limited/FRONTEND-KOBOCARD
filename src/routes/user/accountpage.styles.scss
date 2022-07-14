@@ -1,0 +1,63 @@
+.Profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 50px;
+
+    h1{
+        font-weight: 400;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .Profile-img {
+        margin: 50px 0;
+    }
+
+    .form-styles{
+        text-align: left;
+        width: 700px;
+    .inputs{
+        margin: 20px 0;
+
+        input {
+            width: 100%;
+            font-size: 20px;
+            letter-spacing: 1px;
+            border: none;
+            border-bottom: 1px solid black;
+            padding-top:10px;
+
+            &:focus{
+                border: none;
+            }
+
+            &::placeholder{
+                color: black;
+            }
+        }
+
+        label{
+            font-weight: 500;
+        }
+    }
+
+    button{
+        margin: 20px;
+        align-self: center;
+        background-color: #40c463;
+        color: #fff;
+        font-size: 16px;
+        padding: 5px 0;
+        width: 200px;
+        border: none;
+        border-radius: 5px;
+
+        &:hover{
+            background-color:#216e39;
+        }
+      }
+
+}
+}

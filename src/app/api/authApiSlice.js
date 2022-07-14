@@ -1,6 +1,4 @@
 import { signInApi } from "./api"
-// this was a very stupid decision
-//lets try to put the ednpoints in the apiSlice
 
 export const authApiSlice = signInApi.injectEndpoints({
     endpoints: builder => ({
@@ -15,7 +13,8 @@ export const authApiSlice = signInApi.injectEndpoints({
             query: credentials => ({
                 url: '/users/signinEmail',
                 method: 'POST',
-                body: { ...credentials }
+                body: { ...credentials },
+                keepUnusedDataFor: 5,
             })
         }),
         loginWithPhoneNumber: builder.mutation({
@@ -25,6 +24,13 @@ export const authApiSlice = signInApi.injectEndpoints({
                 body: { ...credentials }
             })
         }),
+        GetUserDetails: builder.query({
+            query: () => ({
+                url: '/users/getUser',
+                method: 'GET',
+                providesTags: ['User Details']
+            })
+        }),
     })
 })
 
@@ -32,4 +38,5 @@ export const {
     useSignUpMutation,
     useLoginMutation,
     useLoginWithPhoneNumberMutation,
+    useGetUserDetailsQuery,
 } = authApiSlice

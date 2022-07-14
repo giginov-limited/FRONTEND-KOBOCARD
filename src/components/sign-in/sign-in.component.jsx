@@ -15,7 +15,7 @@ const SignIn = () => {
     }
     
   const [formFields, setFormFields] = useState(defaultformfields);
-  const { email, password,} = formFields;
+  const { email, password} = formFields;
     
   const result = useSelector((state)=> state.auth.user);
 
@@ -39,6 +39,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
       e.preventDefault();
+      console.log('request sent')
 
       try{
           const userData = await login(formFields).unwrap()
@@ -46,6 +47,7 @@ const SignIn = () => {
           resetFormfields();
           navigateToWelcomePage();
       }catch(err) {
+        console.log(err)
           if(!err?.response){
               setErrMsg('No server Response')
           }else if (err.response?.status === 500){
@@ -55,8 +57,6 @@ const SignIn = () => {
           } else {
               setErrMsg('login Failed')
           }
-          errRef.current.focus();
-
       }
   }
 
