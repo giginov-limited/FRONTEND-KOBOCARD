@@ -1,0 +1,45 @@
+.Ongoing-game{
+    background-color: #000;
+    color: #fff;
+    padding: 50px;
+    margin: 50px 0;
+
+    h2{
+        margin-bottom: 40px;
+    }
+    
+    .cards{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 20px;
+        
+        .card-games{
+            background: #fff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+            gap: 10px;
+
+            .price{
+                font-weight: 400;
+                font-size: 32px;
+                line-height: 39px;
+            }
+
+            button{
+                width: 96px;
+                height: 39px;
+                border-radius: 20px;
+                border: none;
+                margin: 0 5px;
+
+            }
+            .info{
+                background: #3330B7;
+                color: #fff;
+            }
+        }
+    }
+}

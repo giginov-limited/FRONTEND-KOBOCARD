@@ -24,6 +24,7 @@ export const authApiSlice = signInApi.injectEndpoints({
                 body: { ...credentials }
             })
         }),
+        //endPoint to get user details using the endPoint
         GetUserDetails: builder.query({
             query: () => ({
                 url: '/users/getUser',

@@ -2,6 +2,8 @@ import {Outlet} from 'react-router-dom';
 import './homepage.scss'
 import Navigation from '../navigation/navigation'
 import CountdownTimer from '../../components/countDown/countdown-timer';
+import OngoingCardGames from '../../components/Ongoing-Card-Games/OngoingCard.component';
+import Extra from '../../components/Extras/extras';
 
 const Home = () => {
   return(
@@ -18,6 +20,8 @@ const Home = () => {
      </div>
     </div>
     <CountdownTimer CountdownTimestampMs={1660462547000}/>
+    <OngoingCardGames />
+    <Extra />
     <Outlet />
     </div>
   )

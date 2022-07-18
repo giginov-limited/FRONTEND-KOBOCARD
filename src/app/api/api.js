@@ -3,13 +3,18 @@ import { setCredits,logOut } from '../../features/authSlice'
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://kobo-card.herokuapp.com',
+    credentials: 'omit',
+    mode:'cors',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token
+      console.log(token)
 
       if (token) {
-        headers.set('authorization', `Bearer ${token}`)
+        headers.set('Authorization', token)
+      }else {
+        console.log('no token')
       }
-  
+
       return headers
     }
 })
