@@ -2,8 +2,8 @@ import {Outlet,useNavigate} from 'react-router-dom';
 import './sign-in.styles.scss'
 import {useRef, useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import { setCredits } from '../../features/authSlice';
-import { useLoginMutation } from '../../app/api/authApiSlice';
+import { setCredits, setUserDetails } from '../../features/authSlice';
+import { useLoginMutation,useGetUserDetailsQuery } from '../../app/api/authApiSlice';
 
 const SignIn = () => {
   const errRef = useRef()
@@ -31,7 +31,8 @@ const SignIn = () => {
       }
 
   const [login, {isLoading}] =useLoginMutation()
-  const dispatch =useDispatch()
+
+ const dispatch = useDispatch();
 
   useEffect(()=> {
       setErrMsg('')
@@ -43,7 +44,8 @@ const SignIn = () => {
 
       try{
           const userData = await login(formFields).unwrap()
-          dispatch(setCredits({...userData}))
+          console.log(userData)
+          dispatch(setCredits({ ...userData }))
           resetFormfields();
           navigateToWelcomePage();
       }catch(err) {
@@ -67,7 +69,7 @@ const SignIn = () => {
        setFormFields({...formFields,[name]: value});
      };
 
-  const content = isLoading? <h3> Loading...</h3>:(
+  const content = isLoading? <h4>loading...</h4>:(
       <section className='sign-in-page' >
         <div className='sign-in-container'>
         {errMsg? <p className='error'>{errMsg}</p>:null}

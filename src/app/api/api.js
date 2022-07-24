@@ -7,10 +7,9 @@ const baseQuery = fetchBaseQuery({
     mode:'cors',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token
-      console.log(token)
 
       if (token) {
-        headers.set('Authorization', token)
+        headers.set('Authorization', `Bearer ${token}`)
       }else {
         console.log('no token')
       }
@@ -48,5 +47,5 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const signInApi = createApi({
     baseQuery: baseQueryWithReauth,
     endpoints: builder => ({}),
-    tagTypes:['User Details'],
+    tagTypes:['User-Details'],
 })

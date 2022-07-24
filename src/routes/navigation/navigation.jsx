@@ -1,6 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import {Outlet, Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { useGetUserDetailsQuery } from '../../app/api/authApiSlice';
+import { Image } from 'cloudinary-react';
 import { logOut } from '../../features/authSlice';
 import './navigation.style.scss'
 
@@ -30,6 +32,8 @@ const Navigation =() => {
   }
 
   const navigateToAccountPage = () => navigate('/account-page')
+  const {data, isLoading} = useGetUserDetailsQuery();
+  let image = isLoading?"https://res.cloudinary.com/kobocard/image/upload/v1658695490/sv1m2penyqmbzemh8bna.jpg":data.user.picture
 
 
   return(
@@ -53,7 +57,7 @@ const Navigation =() => {
             Wallet
           </button>
           <div onClick={setDropdown} className='profile-pic'>
-           Image
+          <Image cloudName='kobocard' publicId={image} className='image' />
           {dropdownToggle ? <div className='dropdown'>
             <ul>
               <li onClick={navigateToAccountPage}>Account</li>

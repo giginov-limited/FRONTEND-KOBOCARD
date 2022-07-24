@@ -5,6 +5,12 @@
     align-items: center;
     padding: 20px 50px;
 
+    .image{
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+    }
+
     h1{
         font-weight: 400;
         text-align: center;
@@ -13,6 +19,20 @@
 
     .Profile-img {
         margin: 50px 0;
+
+        input{
+            border: none;
+            font-style: italic;
+        }
+
+        button{
+            background-color: #40c463;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            padding: 10px;
+        }
     }
 
     .form-styles{
@@ -24,7 +44,6 @@
         input {
             width: 100%;
             font-size: 20px;
-            letter-spacing: 1px;
             border: none;
             border-bottom: 1px solid black;
             padding-top:10px;

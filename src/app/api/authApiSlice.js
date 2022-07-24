@@ -14,7 +14,6 @@ export const authApiSlice = signInApi.injectEndpoints({
                 url: '/users/signinEmail',
                 method: 'POST',
                 body: { ...credentials },
-                keepUnusedDataFor: 5,
             })
         }),
         loginWithPhoneNumber: builder.mutation({
@@ -29,8 +28,24 @@ export const authApiSlice = signInApi.injectEndpoints({
             query: () => ({
                 url: '/users/getUser',
                 method: 'GET',
-                providesTags: ['User Details']
+                providesTags: ['User-Details']
             })
+        }),
+        UpdateUserDetails: builder.mutation({
+            query: ({id,...rest}) => ({
+                url: `/users/updateUser/${id}`,
+                method: 'POST',
+                body: rest,
+            }),
+            invalidatesTags:['User-Details']
+        }),
+        UpdateUserImage: builder.mutation({
+            query: ({id,...rest}) => ({
+                url: `/users/updateUserImage/${id}`,
+                method: 'POST',
+                body: rest,
+            }),
+            invalidatesTags:['User-Details']
         }),
     })
 })
@@ -40,4 +55,6 @@ export const {
     useLoginMutation,
     useLoginWithPhoneNumberMutation,
     useGetUserDetailsQuery,
+    useUpdateUserDetailsMutation,
+    useUpdateUserImageMutation,
 } = authApiSlice
