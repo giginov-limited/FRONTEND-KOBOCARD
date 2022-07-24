@@ -32,10 +32,8 @@ const Navigation =() => {
   }
 
   const navigateToAccountPage = () => navigate('/account-page')
-  const {data, isLoading} = useGetUserDetailsQuery();
-  let image = isLoading?"https://res.cloudinary.com/kobocard/image/upload/v1658695490/sv1m2penyqmbzemh8bna.jpg":data.user.picture
-
-
+  const {data, isLoading,isError,error} = useGetUserDetailsQuery();
+  let imageData = (isLoading || isError || error)?"https://res.cloudinary.com/kobocard/image/upload/v1658695490/sv1m2penyqmbzemh8bna.jpg":data.user.picture
   return(
 
     <Fragment>
@@ -57,7 +55,8 @@ const Navigation =() => {
             Wallet
           </button>
           <div onClick={setDropdown} className='profile-pic'>
-          <Image cloudName='kobocard' publicId={image} className='image' />
+          
+          <Image cloudName='kobocard' publicId={imageData} className='image'/>
           {dropdownToggle ? <div className='dropdown'>
             <ul>
               <li onClick={navigateToAccountPage}>Account</li>
