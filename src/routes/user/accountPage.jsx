@@ -1,18 +1,15 @@
 import { useSelector } from "react-redux/es/exports"
 import { Image } from "cloudinary-react";
-import { useState,useEffect } from "react";
-import { useDispatch } from "react-redux/es/exports";
+import { useState } from "react";
 import './accountpage.styles.scss'
 import axios from "axios";
-import { setUserDetails } from "../../features/authSlice";
 import { useUpdateUserDetailsMutation,useGetUserDetailsQuery,useUpdateUserImageMutation } from "../../app/api/authApiSlice";
 
 
 const AccountPage = () => {
 
-    const {data, isLoading, isSuccess,refetch} = useGetUserDetailsQuery();
-    console.log(data)
-
+    const {data, isLoading,isSuccess, isError,refetch} = useGetUserDetailsQuery();
+    const user = data?.user;
   
      const [updateUser] = useUpdateUserDetailsMutation();
      const [updateUserImage] = useUpdateUserImageMutation();
@@ -29,10 +26,10 @@ const AccountPage = () => {
       state: ""
     }
 
-    console.log(defaultformfields)
-    
-    const [formFields, setFormFields] = useState(defaultformfields)
-    const {address_one, address_two, country, email, firstName, lastName, phone, state} = formFields
+    const [formFields, setFormFields] = useState(isSuccess?user:isError?refetch():defaultformfields)
+    console.log(user)
+    const {address_one, address_two, country, email, firstName, lastName, phone, state, id} = formFields
+    console.log(formFields)
     
     const [imageSelected, setImageSelected] = useState(null)
     const [imageUrl, setImageUrl] = useState(data?data.user.picture:'')
@@ -62,7 +59,7 @@ const AccountPage = () => {
      }
     };
 
-    let image = isLoading?"https://res.cloudinary.com/kobocard/image/upload/v1658695490/sv1m2penyqmbzemh8bna.jpg":data.user.picture
+    let image = isLoading||isError?"https://res.cloudinary.com/kobocard/image/upload/v1658695490/sv1m2penyqmbzemh8bna.jpg":data.user.picture
     
 
 
@@ -86,18 +83,19 @@ const AccountPage = () => {
     
 
 
-      let content = isLoading?<h1>loading</h1>:(
+      let content = isLoading?<h1>loading</h1>:
+      isSuccess?(
         <>
           <h1>Account Information</h1>
 
           <div className="Profile-img">
            <Image cloudName='kobocard' publicId={image} className='image'  />
-           <input type='file'
-           placeholder="Change Profile Image"
+           <button onClick={uploadImage}>Upload Image</button>
+           <input 
+           type='file'
            className="image-input"
            onChange={onChangeImageHandler} 
            />
-           <button onClick={uploadImage}>Upload Image</button>
           </div>
           <form className='form-styles' >
             <div className='inputs'>
@@ -196,7 +194,7 @@ const AccountPage = () => {
 
 
         </>
-      )
+      ): refetch();
 
     return(
         <div className='Profile-container'>
