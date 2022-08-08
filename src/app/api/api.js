@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setCredits,logOut } from '../../features/authSlice'
+import { setCredits,logOut,setRefreshToken } from '../../features/authSlice'
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://kobo-card.herokuapp.com',
@@ -7,7 +7,6 @@ const baseQuery = fetchBaseQuery({
     mode:'cors',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token
-      console.log(getState().auth.refreshToken)
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
@@ -25,16 +24,18 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   let result = await baseQuery(args, api, extraOptions)
   if (result.error && result.error.status === 401) {
-    // try to get a new token
+    const refreshtoken = api.getState().auth.refreshToken
     const refreshResult = await baseQuery({
-                  url: '/users/generateTokens',
-                  method: 'POST'
-                }, api, extraOptions)
+        url: '/users/generateTokens',
+        method: 'POST',
+        body:{'refresh_token':refreshtoken},
+        }, api, extraOptions)
+
+        console.log(refreshResult.data)
 
     if (refreshResult.data) {
       // store the new token
-      const user = api.getState().auth.user
-      api.dispatch(setCredits({ ...refreshResult.data, user }))
+      api.dispatch(setRefreshToken({ ...refreshResult.data}))
       // retry the initial query
       result = await baseQuery(args, api, extraOptions)
     } else {

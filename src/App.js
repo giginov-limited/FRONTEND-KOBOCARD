@@ -10,6 +10,7 @@ import SignInWithPhoneNumber from './components/sign-in/sign-in-PhoneNum.compone
 import RequireAuth from './features/RequireAuth'
 import LoginPage from './components/login-page/loginPage';
 import AccountPage from './routes/user/accountPage';
+import FetchData from './routes/user/UserPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 
            <Route element={<RequireAuth />}>
             <Route path='welcome' element={<LoginPage />} />
+            <Route path='user' element={<FetchData />}  />
             <Route path='account-page' element={<AccountPage />} />
            </Route>
            </Route>

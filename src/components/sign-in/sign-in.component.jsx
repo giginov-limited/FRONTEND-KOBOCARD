@@ -2,8 +2,8 @@ import {Outlet,useNavigate} from 'react-router-dom';
 import './sign-in.styles.scss'
 import {useRef, useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import { setCredits, setUserDetails } from '../../features/authSlice';
-import { useLoginMutation,useGetUserDetailsQuery } from '../../app/api/authApiSlice';
+import { setCredits } from '../../features/authSlice';
+import { useLoginMutation} from '../../app/api/authApiSlice';
 
 const SignIn = () => {
   const errRef = useRef()
@@ -16,9 +16,6 @@ const SignIn = () => {
     
   const [formFields, setFormFields] = useState(defaultformfields);
   const { email, password} = formFields;
-    
-  const result = useSelector((state)=> state.auth.user);
-
   
   const navigate = useNavigate();
 
@@ -44,7 +41,6 @@ const SignIn = () => {
 
       try{
           const userData = await login(formFields).unwrap()
-          console.log(userData)
           dispatch(setCredits({ ...userData }))
           resetFormfields();
           navigateToWelcomePage();

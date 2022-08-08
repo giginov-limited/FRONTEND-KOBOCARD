@@ -1,0 +1,58 @@
+.wrapper{
+
+    .welcome{
+        text-align: center;
+    }
+
+    .card-games{
+
+        margin-top: 50px;
+
+        .header-2{
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 43px;
+        }
+    }
+    .top{
+        margin-top: 50px ;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 60px;
+
+        .card{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.64);
+            width: 269px;
+            height: 216px;
+            font-size: 24px;
+            font-weight: 400;
+
+            .srt{
+                align-self: flex-start;
+                font-size: 16px;
+            }
+
+            button{
+                font-size: 16px;
+                line-height: 20px;
+                width: 250px;
+                height: 39px;
+                border: none;
+                border-radius: 10px;
+                background: #3330B7;
+                color: white;
+
+                &:hover{
+                    background: rgba(51, 48, 183, 0.8);
+                }
+            }
+        }
+    }
+}
+    
