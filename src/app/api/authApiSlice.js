@@ -47,6 +47,19 @@ export const authApiSlice = signInApi.injectEndpoints({
             }),
             invalidatesTags:['User-Details']
         }),
+        GetAllCardGames: builder.query({
+            query: () => ({
+                url:'/users/getOngoingGames',
+                method: 'GET',
+                providesTags: ['Games']
+            })
+        }),
+        GetCardGamesById: builder.query({
+            query: (id) => ({
+                url:`/users/getGameById/${id}`,
+                method: 'GET',
+            })
+        }),
     })
 })
 
@@ -57,4 +70,6 @@ export const {
     useGetUserDetailsQuery,
     useUpdateUserDetailsMutation,
     useUpdateUserImageMutation,
+    useGetAllCardGamesQuery,
+    useGetCardGamesByIdQuery,
 } = authApiSlice

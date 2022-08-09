@@ -1,7 +1,8 @@
 import './OngoingCard.styles.scss'
+import { useGetAllCardGamesQuery } from '../../app/api/authApiSlice';
 
 const OngoingCardGames = () =>{
-    
+
     return(
         <div className='Ongoing-game'>
           <h2>ONGOING GAMES</h2>

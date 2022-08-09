@@ -11,6 +11,7 @@ import RequireAuth from './features/RequireAuth'
 import LoginPage from './components/login-page/loginPage';
 import AccountPage from './routes/user/accountPage';
 import FetchData from './routes/user/UserPage';
+import CardDescription from './routes/CardGameDescription/CardGameInfo';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
            <Route path='sign-up' element ={<SignUp />} />
            <Route path='sign-in' element ={<SignIn />} />
            <Route path='SignInWithPhoneNumber' element ={<SignInWithPhoneNumber />} />
+           <Route path='card/:cardId' element ={<CardDescription/>} />
 
            <Route element={<RequireAuth />}>
             <Route path='welcome' element={<LoginPage />} />

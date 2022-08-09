@@ -49,5 +49,5 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const signInApi = createApi({
     baseQuery: baseQueryWithReauth,
     endpoints: builder => ({}),
-    tagTypes:['User-Details'],
+    tagTypes:['User-Details', 'Games'],
 })
