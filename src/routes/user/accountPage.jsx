@@ -9,10 +9,13 @@ import { useEffect } from "react";
 
 
 const Info = ({value}) => {
+  console.log(value)
 
     const [message, setMessage] = useState(null)
 
-    const user = value?.user
+    const user = value[0].user
+    const refresh = value[1]
+    console.log(refresh)
     const {refetch} = useGetUserDetailsQuery()
      const [updateUser] = useUpdateUserDetailsMutation();
      const [updateUserImage] = useUpdateUserImageMutation();
@@ -46,7 +49,8 @@ const Info = ({value}) => {
        ).then((res)=> {
         const responce= updateUserImage({id,'picture_url':res.data.secure_url}).unwrap()
          setMessage(responce.message)
-         refetch()
+         refresh()
+         console.log('updated')
        });
 
      }catch(error){
@@ -197,12 +201,13 @@ function AccountPage() {
     isSuccess,
     isError,
     error,
+    refetch,
   } = useGetUserDetailsQuery(1)
 
 
   let postContent = isLoading?(<>
   <div>loadingg</div>
-  </>):isSuccess?(<Info value={data}/>):
+  </>):isSuccess?(<Info value={[data,refetch]}/>):
   console.log(isError)
 
   return( <div>{postContent}</div>)

@@ -12,10 +12,10 @@ const Navigation =() => {
   const navigateToSignInPage = ()=>{
     navigate('/sign-in')
   }
-
   const navigateToSignUpPage = ()=>{
     navigate('/sign-up')
   }
+
 
   const user = useSelector((state)=> state.auth.user)
 
@@ -32,6 +32,7 @@ const Navigation =() => {
   }
 
   const navigateToAccountPage = () => navigate('/account-page')
+  const navigateToWalletPage = () => navigate('/wallet')
   const {data, isLoading,isError,error} = useGetUserDetailsQuery();
   let imageData = (isLoading || isError || error)?"https://res.cloudinary.com/kobocard/image/upload/v1658695490/sv1m2penyqmbzemh8bna.jpg":data.user.picture
   return(
@@ -51,7 +52,7 @@ const Navigation =() => {
           {
             user?(
          <div className='buttons'>
-          <button onClick={navigateToSignInPage} className="wallet-class">
+          <button onClick={navigateToWalletPage} className="wallet-class">
             Wallet
           </button>
           <div onClick={setDropdown} className='profile-pic'>

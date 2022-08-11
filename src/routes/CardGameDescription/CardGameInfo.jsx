@@ -10,6 +10,8 @@ import './card.style.scss'
 const CardDescription = () => {
     const {cardId} = useParams();
     const id = cardId.substring(1)
+    const {data} = useGetCardGamesByIdQuery(id)
+    console.log(data)
     
     const [card, setCard] = useState('')
 

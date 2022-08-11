@@ -31,6 +31,13 @@ export const authApiSlice = signInApi.injectEndpoints({
                 providesTags: ['User-Details']
             })
         }),
+        GetUserWalletDetails: builder.query({
+            query: () => ({
+                url: '/users/getWallet',
+                method: 'GET',
+                providesTags: ['User-Details']
+            })
+        }),
         UpdateUserDetails: builder.mutation({
             query: ({id,...rest}) => ({
                 url: `/users/updateUser/${id}`,
@@ -60,6 +67,14 @@ export const authApiSlice = signInApi.injectEndpoints({
                 method: 'GET',
             })
         }),
+        PayCardGamesById: builder.mutation({
+            query: (id) => ({
+                url: `/users/payForGame/${id}`,
+                method: 'POST',
+            }),
+            invalidatesTags:['User-Details']
+        }),
+        
     })
 })
 
@@ -72,4 +87,6 @@ export const {
     useUpdateUserImageMutation,
     useGetAllCardGamesQuery,
     useGetCardGamesByIdQuery,
+    useGetUserWalletDetailsQuery,
+    usePayCardGamesByIdMutation,
 } = authApiSlice

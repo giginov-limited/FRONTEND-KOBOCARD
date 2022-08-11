@@ -11,6 +11,9 @@ const AllCardGames = () => {
     const navigateToCardsHandler = (id) =>{
         navigate(`/card/:${id}`)
     }
+    const navigateToPayHandler = (id) =>{
+        navigate(`/Pay/:${id}`)
+    }
 
     let content = isLoading?<h3>loading games....</h3>:
     isSuccess?(data.games.map((game)=> {
@@ -40,7 +43,7 @@ const AllCardGames = () => {
                       <span className='price'>
                         &#8358;
                         {game.price}</span>    
-                    <button>Play Now</button>
+                    <button onClick={()=> navigateToPayHandler(game.id)}>Play Now</button>
                 </div>
             </div>
     )
