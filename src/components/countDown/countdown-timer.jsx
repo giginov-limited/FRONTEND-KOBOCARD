@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useState } from 'react'
-import './countDownTimer.scss'
 import { getRemainingTimeUntilMsTimestamp } from './utils/countdownTimerUtils';
 
 const CountdownTimer = ({CountdownTimestampMs}) => {
@@ -27,29 +26,29 @@ const CountdownTimer = ({CountdownTimestampMs}) => {
     }
 
     return(
-    <div className='countdown-timer'>
-        <div className='countdown-text'>
-        <span>Countdown to Next Card </span>
+    <div className='w-full bg-timer-bg py-5 flex justify-around items-center text-xl '>
+        <div className='max-w-[379px]'>
+        <span className='font-inter tracking-wide '>Countdown to Next Card </span>
         </div>
         
-        <div className='countdown-timers'> 
+        <div className='flex'> 
 
-        <div className='countdown'>       
+        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
         <span>{remainingTime.days}</span>
         <span>days</span>
         </div> 
 
-        <div className='countdown'>       
+        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
         <span>{remainingTime.hours}</span>
         <span>hours</span>
         </div> 
 
-        <div className='countdown'>       
+        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
         <span>{remainingTime.minutes}</span>
         <span>minutes</span>
         </div> 
 
-        <div className='countdown'>       
+        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
         <span>{remainingTime.seconds}</span>
         <span>seconds</span>
         </div> 
