@@ -1,0 +1,19 @@
+.pagenation-wrapper {
+    max-width: 1159px;
+    margin: 20px auto;
+
+    ul{
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+
+        button{
+            cursor: pointer;
+            padding: 3px;
+            &:hover{
+                background-color:red;
+            }
+        }
+    }
+}

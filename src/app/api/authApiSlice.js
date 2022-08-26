@@ -31,6 +31,13 @@ export const authApiSlice = signInApi.injectEndpoints({
                 providesTags: ['User-Details']
             })
         }),
+        GetUserGames: builder.query({
+            query: () => ({
+                url: '/users/getUserGames',
+                method: 'GET',
+                providesTags: ['User-Details']
+            })
+        }),
         GetUserWalletDetails: builder.query({
             query: () => ({
                 url: '/users/getWallet',
@@ -89,4 +96,5 @@ export const {
     useGetCardGamesByIdQuery,
     useGetUserWalletDetailsQuery,
     usePayCardGamesByIdMutation,
+    useGetUserGamesQuery,
 } = authApiSlice

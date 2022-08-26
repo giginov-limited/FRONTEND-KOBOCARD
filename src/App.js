@@ -14,6 +14,7 @@ import FetchData from './routes/user/UserPage';
 import CardDescription from './routes/CardGameDescription/CardGameInfo';
 import UserWallet from './routes/wallet/wallet';
 import UserPay from './routes/Pay/userPay';
+import Dashboard from './components/dasboard/Dashboard';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path='user' element={<FetchData />}  />
             <Route path='account-page' element={<AccountPage />} />
             <Route path='wallet' element={<UserWallet />} />
+            <Route path='dashboard' element={<Dashboard />} />
            </Route>
            </Route>
          </Routes>
