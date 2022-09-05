@@ -2,7 +2,6 @@ import {Outlet, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import './sign-up.styles.scss';
 
 const SignUp = () => {
   
@@ -73,46 +72,92 @@ const SignUp = () => {
   };
 
   return(
-    <div className='sign-up-page'>
-    <div className='sign-up-container'>
-    <Link to='/sign-in'>Already have an Account?
+    <div className='bg-BG py-8 min-h-screen font-inter'>
+    <div className='w-[600px]  bg-white flex flex-col items-center rounded-lg shadow mx-auto'>
+    <Link to='/sign-in' className='text-sm hover:underline'>Already have an Account?
        Sign in 
     </Link>
-   <h2>Create Your Account</h2>
+   <h2 className='text-4xl my-2'>Create Your Account</h2>
 
    {errMsg? <p className='error'>{errMsg}</p>:null}
-   <form className='form-styles' onSubmit={handleSubmit}>
+   <form className='w-[450px] flex flex-col  my-3' onSubmit={handleSubmit}>
 
-   <div className='inputs'>
-   <label>First Name</label>
-   <input label='first Name' type="text" required onChange={handleChange} name="first_name" value={first_name}/>
+   <div className='flex flex-col my-3 items-start'>
+   <label className='block mb-2 text-sm font-medium text-gray-900 font-inter'>First Name</label>
+   <input 
+    label='first Name'
+    type="text" 
+    required 
+    onChange={handleChange} 
+    name="first_name" 
+    value={first_name}
+    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    />
    </div>
 
-    <div className='inputs'>
-   <label>Last Name</label>
-   <input type="text" required onChange={handleChange} name="last_name" value={last_name}/>
+    <div className='flex flex-col my-3 items-start'>
+   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Last Name</label>
+   <input
+    type="text"
+    required 
+    onChange={handleChange} 
+    name="last_name" 
+    value={last_name}
+    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    />
    </div>
 
-   <div className='inputs'>
-  <label>Phone Number</label>
-  <input type="number" required onChange={handleChange} name="phone" value={phone}/>
+   <div className='flex flex-col my-3 items-start'>
+  <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Phone Number</label>
+  <input 
+  type="number" 
+  required 
+  onChange={handleChange} 
+  name="phone" 
+  value={phone}
+  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+  />
   </div>
 
-    <div className='inputs'>
-   <label>Email</label>
-   <input type="email" required onChange={handleChange} name="email" value={email}/>
+  <div className='flex flex-col my-3 items-start'>
+   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Email</label>
+   <input 
+   type="email" 
+   required 
+   onChange={handleChange} 
+   name="email" 
+   value={email}
+   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+   />
     </div>
 
-   <div className='inputs'>
-   <label>Password</label>
-   <input type="password" required onChange={handleChange} name="password" value={password}/>
+   <div className='flex flex-col my-3 items-start'>
+   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Password</label>
+   <input 
+   type="password" 
+   required 
+   onChange={handleChange} 
+   name="password" 
+   value={password}
+   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+   />
    </div>
 
-    <div className='inputs'>
-   <label>confirm Password</label>
-   <input type="password" required onChange={handleChange} name="confirm_Password" value={confirm_Password}/>
+    <div className='flex flex-col my-3 items-start'>
+   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>confirm Password</label>
+   <input 
+   type="password" 
+   required 
+   onChange={handleChange} 
+   name="confirm_Password" 
+   value={confirm_Password}
+   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+   />
    </div>
-   <button  type="submit"> sign Up</button>
+   <button  
+   type="submit"
+   className='w-[200px] py-2 text-lg text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br rounded-md'
+   > Sign Up</button>
    </form>
    </div>
    <Outlet />
