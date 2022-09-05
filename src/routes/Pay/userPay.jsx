@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useGetCardGamesByIdQuery, usePayCardGamesByIdMutation, useGetUserWalletDetailsQuery } from "../../app/api/authApiSlice";
-import './pay.styles.scss'
 
 
 const Details = ({value}) =>{
@@ -41,25 +40,29 @@ const Details = ({value}) =>{
 
     let content = isLoading?<h2>...</h2>:
     isSuccess?
-    <div className="pay-card">
+    <div className="w-[90%] md:w-10/12 mx-auto">
 
-         <div className="pay-card-1">
-        <img src="https://images.unsplash.com/photo-1584936684506-c3a7086e8212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80" className="image" alt="pic" />
-        <div className="pay-card-details">
+        <div className="flex justify-start gap-12 max-h-[200px]">
+        <img
+        className="w-[230px] h-[200px]"
+        src="https://images.unsplash.com/photo-1584936684506-c3a7086e8212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80"  alt="pic" />
+        <div className="flex flex-col justify-evenly items-start text-base">
             <p>Card title: {data.game.title}</p>
             <p>Card Status: {data.game.status}</p>
             <p>Account Balance:{amount}</p>
             <p>Card fee:{data.game.price}</p>
-            <button onClick={onClickHandler}>pay up!</button>
+            <button
+             className="bg-btn-bg text-white py-2 rounded-sm px-4 cursor-pointer"
+             onClick={onClickHandler}>Pay up!</button>
         </div>
          </div>
     </div>:<h3>{error}</h3>
     
     return(
-        <div className="pay-wrapper">
+        <div className="bg-BG font-inter h-screen">
             {msg}
-            <p>Card Purchase Details</p>
-            <div className="content">
+            <p className="text-3xl text-center pt-4">Card Purchase Details</p>
+            <div className="my-12">
             {content}
             </div>
         </div>
@@ -67,15 +70,15 @@ const Details = ({value}) =>{
 }
 
 
-// export default UserPay
-
-
 const UserPay =()=>{
     const {data, isLoading,isSuccess} = useGetUserWalletDetailsQuery()
 
     let content = isLoading?<p>...</p>:isSuccess?(<Details value={data.wallet} />):console.log('error');
 
-    return content
+    return (
+    <>
+    {content}
+    </>)
 
 }
 

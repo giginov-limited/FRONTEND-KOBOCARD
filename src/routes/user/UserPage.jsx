@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useGetUserDetailsQuery } from "../../app/api/authApiSlice"
+import Loading from "../../components/Loading/Loading.Component";
 import AccountPage from "./accountPage";
 
 function Use({value}) {
@@ -21,7 +22,7 @@ function FetchData() {
 
 
     let postContent = isLoading?(<>
-    <div>loadingg</div>
+    <Loading />
     </>):isSuccess?(<Use value={data.user}/>):
     console.log(isError)
 

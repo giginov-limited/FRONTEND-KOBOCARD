@@ -15,7 +15,7 @@ const Home = () => {
       }}
     >
     <Navigation />
-    <div className='font-bold text-white text-5xl text-center flex w-full px-12  justify-end my-20 leading-tight'>
+    <div className='font-bold text-white text-5xl text-center flex w-full px-12  justify-end my-20 leading-tight tracking-wide'>
      <h1>WINNING BIG<br/> STARTS WITH<br/> KOBOCARD</h1>
      </div>
     </div>

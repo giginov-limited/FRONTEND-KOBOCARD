@@ -38,20 +38,13 @@ export const authApiSlice = signInApi.injectEndpoints({
                 providesTags: ['User-Details']
             })
         }),
-        GetUserWalletDetails: builder.query({
-            query: () => ({
-                url: '/users/getWallet',
-                method: 'GET',
-                providesTags: ['User-Details']
-            })
-        }),
         UpdateUserDetails: builder.mutation({
             query: ({id,...rest}) => ({
                 url: `/users/updateUser/${id}`,
                 method: 'POST',
                 body: rest,
             }),
-            invalidatesTags:['User-Details']
+            // invalidatesTags:['User-Details']
         }),
         UpdateUserImage: builder.mutation({
             query: ({id,...rest}) => ({
@@ -61,6 +54,26 @@ export const authApiSlice = signInApi.injectEndpoints({
             }),
             invalidatesTags:['User-Details']
         }),
+
+
+        //User wallet.
+        GetUserWalletDetails: builder.query({
+            query: () => ({
+                url: '/users/getWallet',
+                method: 'GET',
+                providesTags: ['User-Details']
+            })
+        }),
+        FundWalltet: builder.mutation({
+            query: ({id,user_id,...rest}) => ({
+                url: `/users/fundWallet/?userId=${user_id}&walletId=${id}`,
+                method: 'POST',
+                body: rest,
+            }),
+            invalidatesTags:['User-Details']
+        }),
+
+
         GetAllCardGames: builder.query({
             query: () => ({
                 url:'/users/getOngoingGames',
@@ -81,7 +94,6 @@ export const authApiSlice = signInApi.injectEndpoints({
             }),
             invalidatesTags:['User-Details']
         }),
-        
     })
 })
 
@@ -97,4 +109,5 @@ export const {
     useGetUserWalletDetailsQuery,
     usePayCardGamesByIdMutation,
     useGetUserGamesQuery,
+    useFundWalltetMutation,
 } = authApiSlice
