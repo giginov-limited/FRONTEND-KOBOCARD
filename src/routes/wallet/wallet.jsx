@@ -14,8 +14,12 @@ const Wallet = ({wallet}) =>{
     const { id, user_id} =wallet
     
     const onChange = (e) => {
-        setAmount(e.target.value)
+        // num = e.target.value.toString()
+        // console.log(num)
+        setAmount(e.target.value.toString())
     }
+
+    console.log(amount)
 
   
     const componentProps = {
@@ -29,7 +33,11 @@ const Wallet = ({wallet}) =>{
       className:"block bg-green-500 cursor-pointer p-2 my-4 rounded shadow-md text-white text-base",
       text: "Fund Wallet",
       onSuccess: () =>{
-        fund({id,user_id,amount}) 
+        const am = 
+            {
+                "amount": `${amount}`
+           }
+        fund({id,user_id,am}) 
         alert("Thanks for doing business with us! Come back soon!!")
       },
       onClose: () => alert("Wait! Don't leave :("),
@@ -44,7 +52,7 @@ const Wallet = ({wallet}) =>{
             <p className="text-xl font-inter">Fund Wallet</p>
             <div className="bg-pay-bg w-[319px] h-[254px] mx-auto flex justify-center items-center shadow-lg">
                 <div className="text-2xl font-inter flex flex-col gap-2 justify-start items-start">
-                <label for='number' className="text-base">Amount:</label>
+                <label htmlFor='number' className="text-base">Amount:</label>
                 <input 
                 type='number'
                 onChange={onChange}

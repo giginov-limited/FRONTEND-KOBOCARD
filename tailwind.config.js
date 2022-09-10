@@ -14,6 +14,7 @@ module.exports = {
         "border-bg": "#EBCDCD",
         "btn-bg":"#3330B7",
         "pay-bg":"#F2F1F8",
+        "dark-bg": "#000000e1",
       },
       
       fontFamily: {

@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useGetCardGamesByIdQuery, usePayCardGamesByIdMutation, useGetUserWalletDetailsQuery } from "../../app/api/authApiSlice";
+import Modal from "../../components/Modal/modal";
 
 
-const Details = ({value}) =>{
+const Details = ({value, refetch}) =>{
     const {amount} = value
+
     const {cardId} = useParams()
 
     const id = cardId.substring(1)
     const [pay] = usePayCardGamesByIdMutation()
     const {data,isLoading,isSuccess,isError, error} = useGetCardGamesByIdQuery(id)
     const [msg, setMsg] = useState()
+    const [openModal, setOpenModal] = useState(false)
 
     useEffect(()=>{
-        setTimeout(() => setMsg(null), 10000)
-       },[msg])
+        const timer = setTimeout(() => setOpenModal(false), 2500);
+        return () => clearTimeout(timer)
+       },[openModal])
 
     let messageHandler =
     <div className="message">
@@ -33,6 +37,8 @@ const Details = ({value}) =>{
         try {
             const res = await pay(id).unwrap()
             setMsg(messageHandler)
+            setOpenModal(true)
+            refetch()
         }catch(err){
             console.log(err)
         }
@@ -59,11 +65,14 @@ const Details = ({value}) =>{
     </div>:<h3>{error}</h3>
     
     return(
-        <div className="bg-BG font-inter h-screen">
-            {msg}
+        <div className="bg-BG font-inter h-screen relative ">
+            
+            <div className="">
             <p className="text-3xl text-center pt-4">Card Purchase Details</p>
             <div className="my-12">
             {content}
+            </div>
+            <Modal open={openModal} onClose={()=> setOpenModal(false)}/>
             </div>
         </div>
     )
@@ -71,9 +80,11 @@ const Details = ({value}) =>{
 
 
 const UserPay =()=>{
-    const {data, isLoading,isSuccess} = useGetUserWalletDetailsQuery()
+    const {data, isLoading,isSuccess, refetch} = useGetUserWalletDetailsQuery()
 
-    let content = isLoading?<p>...</p>:isSuccess?(<Details value={data.wallet} />):console.log('error');
+
+    let content = isLoading?<p>...</p>:isSuccess?
+    (<Details value={data.wallet} {...refetch}/>):console.log('error');
 
     return (
     <>

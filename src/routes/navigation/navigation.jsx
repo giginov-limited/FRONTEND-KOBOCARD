@@ -68,7 +68,7 @@ const Navigation =() => {
           <div className='h-12 w-12 rounded-full'>
           <DisplayPicture />
           </div>
-          {dropdownToggle ? <div className='absolute w-[200px] top-14 right-0 bg-dropdown-bg rounded shadow-md'>
+          {dropdownToggle ? <div className='absolute w-[200px] top-14 right-0 z-30 bg-dropdown-bg rounded shadow-md'>
             <ul className='space-y-2'>
               <li className='cursor-pointer hover:bg-gray-500 py-2' onClick={navigateToAccountPage}>Account</li>
               <li className='cursor-pointer hover:bg-gray-500 py-2' >Draw history</li>
