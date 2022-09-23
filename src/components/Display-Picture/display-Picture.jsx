@@ -1,17 +1,19 @@
 import { useGetUserDetailsQuery } from "../../app/api/authApiSlice";
 
 
-const Pic = ({user}) => {
+const Pic = ({user,styles}) => {
     const {picture} = user
+    // console.log(height)
     return(
         <>
-        <img src={picture} alt="" className="h-12 w-12 rounded-full" />
+        <img src={picture} alt="" className="h-11 w-11 rounded-full"
+           style={styles}  />
         </>
     )
     
 }
 
-const DisplayPicture = ()=>{
+const DisplayPicture = ({styles})=>{
     const {
         data,
         isLoading,
@@ -19,10 +21,12 @@ const DisplayPicture = ()=>{
         isError,
       } = useGetUserDetailsQuery()
     
+      
+    
     
       let postContent = isLoading?(<>
       <div>loadingg</div>
-      </>):isSuccess?(<Pic {...data}/>):
+      </>):isSuccess?(<Pic {...data} styles={styles} />):
       console.log(isError)
     
       return( <div>{postContent}</div>)

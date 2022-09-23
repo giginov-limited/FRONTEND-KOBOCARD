@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredits,logOut,setRefreshToken } from '../../features/authSlice'
 
+
+//Base endpoint plus header
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://kobo-card.herokuapp.com',
+    baseUrl: 'https://kobocard-dev.herokuapp.com',
     credentials: 'omit',
-    // mode:'cors',
+    mode:'cors',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token
       console.log(token)

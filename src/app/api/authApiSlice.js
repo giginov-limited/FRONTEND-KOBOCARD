@@ -44,7 +44,7 @@ export const authApiSlice = signInApi.injectEndpoints({
                 method: 'POST',
                 body: rest,
             }),
-            // invalidatesTags:['User-Details']
+            invalidatesTags:['User-Details']
         }),
         UpdateUserImage: builder.mutation({
             query: ({id,...rest}) => ({
@@ -65,10 +65,10 @@ export const authApiSlice = signInApi.injectEndpoints({
             })
         }),
         FundWalltet: builder.mutation({
-            query: ({id,user_id,...rest}) => ({
+            query: ({id,user_id,am}) => ({
                 url: `/users/fundWallet/?userId=${user_id}&walletId=${id}`,
                 method: 'POST',
-                body: rest,
+                body: am,
             }),
             invalidatesTags:['User-Details']
         }),

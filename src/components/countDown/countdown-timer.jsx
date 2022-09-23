@@ -26,29 +26,29 @@ const CountdownTimer = ({CountdownTimestampMs}) => {
     }
 
     return(
-    <div className='w-full bg-timer-bg py-5 flex justify-around items-center text-xl '>
+    <div className='w-full  py-12 flex flex-col justify-around items-center text-xl gap-12 '>
         <div className='max-w-[379px]'>
-        <span className='font-inter tracking-wide '>Countdown to Next Card </span>
+        <span className='font-inter tracking-wider text-4xl uppercase font-semibold'>Countdown to the Next Card </span>
         </div>
         
         <div className='flex'> 
 
-        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
+        <div className='flex flex-col mx-4 font-light text-6xl tracking-wide font-lato  p-3 '>       
         <span>{remainingTime.days}</span>
         <span>days</span>
         </div> 
 
-        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
+        <div className='flex flex-col mx-4 font-light text-6xl tracking-wide font-lato  p-3 '>       
         <span>{remainingTime.hours}</span>
         <span>hours</span>
         </div> 
 
-        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
+        <div className='flex flex-col mx-4 font-light text-6xl tracking-wide font-lato  p-3 '>       
         <span>{remainingTime.minutes}</span>
         <span>minutes</span>
         </div> 
 
-        <div className='flex flex-col mx-4 bg-timer rounded-md p-3 shadow-lg'>       
+        <div className='flex flex-col mx-4 font-light text-6xl tracking-wide font-lato  p-3 '>       
         <span>{remainingTime.seconds}</span>
         <span>seconds</span>
         </div> 
