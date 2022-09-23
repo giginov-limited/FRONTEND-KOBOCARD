@@ -26,6 +26,8 @@ module.exports = {
         "home-text": "#FFDA79",
         "homeGames-bg":  "#ECC55D",
         "play-btn":"#05C718",
+        "paystack-btn": "#EEBC58",
+        "Fund-wallet": "#373737",
       },
       
       fontFamily: {
