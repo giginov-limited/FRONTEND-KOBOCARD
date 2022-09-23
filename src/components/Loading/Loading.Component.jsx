@@ -2,7 +2,7 @@ const Loading = () => {
 
     return (
 
-<div className="p-6">
+<div className="p-6 w-full h-full flex justify-center items-center ">
 
 <div role="status" className="mx-6 h-full w-full flex justify-center items-center">
     <svg className="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

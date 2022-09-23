@@ -23,7 +23,7 @@ const OngoingCardGames = () =>{
   (data.games.map((game)=>{
 
     colors.forEach((e)=>{
-      console.log( Math.random())
+      // console.log( Math.random())
     })
 
     return(
