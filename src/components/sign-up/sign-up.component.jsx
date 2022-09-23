@@ -42,7 +42,6 @@ const SignUp = () => {
     try {
       await axios.post('https://kobo-card.herokuapp.com/users/signup', form)
         .then(res => {
-          console.log(res);
           navigateToSignIn();
           resetFormfields();
         });
@@ -73,93 +72,117 @@ const SignUp = () => {
 
   return(
     <div className='bg-BG py-8 min-h-screen font-inter'>
-    <div className='w-[600px]  bg-white flex flex-col items-center rounded-lg shadow mx-auto'>
-    <Link to='/sign-in' className='text-sm hover:underline'>Already have an Account?
-       Sign in 
-    </Link>
-   <h2 className='text-4xl my-2'>Create Your Account</h2>
+      <div className='w-[600px]  bg-white flex flex-col items-center rounded-lg shadow mx-auto'>
+        <Link to='/sign-in' className='text-sm hover:underline'>Already have an Account?
+          Sign in 
+        </Link>
 
-   {errMsg? <p className='error'>{errMsg}</p>:null}
-   <form className='w-[450px] flex flex-col  my-3' onSubmit={handleSubmit}>
+        <h2 className='text-4xl my-2 font-semibold'>Create Account</h2>
+        <p className='text-sm my-3 opacity-30'>Enter the following credentials to create your account</p>
 
-   <div className='flex flex-col my-3 items-start'>
-   <label className='block mb-2 text-sm font-medium text-gray-900 font-inter'>First Name</label>
-   <input 
-    label='first Name'
-    type="text" 
-    required 
-    onChange={handleChange} 
-    name="first_name" 
-    value={first_name}
-    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-    />
-   </div>
+        {errMsg? <p className='error'>{errMsg}</p>:null}
 
-    <div className='flex flex-col my-3 items-start'>
-   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Last Name</label>
-   <input
-    type="text"
-    required 
-    onChange={handleChange} 
-    name="last_name" 
-    value={last_name}
-    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-    />
-   </div>
+        <form className='w-[450px] flex flex-col my-3 gap-6' onSubmit={handleSubmit}>
 
-   <div className='flex flex-col my-3 items-start'>
-  <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Phone Number</label>
-  <input 
-  type="number" 
-  required 
-  onChange={handleChange} 
-  name="phone" 
-  value={phone}
-  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-  />
-  </div>
+        <div className=' relative group'>
+          <input 
+            label='first Name'
+            type="text" 
+            required 
+            onChange={handleChange} 
+            name="first_name" 
+            value={first_name}
+            className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
+          />
+          <label 
+          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>First Name</label>
+        </div>
 
-  <div className='flex flex-col my-3 items-start'>
-   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Email</label>
-   <input 
-   type="email" 
-   required 
-   onChange={handleChange} 
-   name="email" 
-   value={email}
-   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-   />
-    </div>
+        <div className=' relative group'>
+          <input
+            type="text"
+            required 
+            onChange={handleChange} 
+            name="last_name" 
+            value={last_name}
+            className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
+          />
+          <label  
+          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Last Name</label>
+        </div>
 
-   <div className='flex flex-col my-3 items-start'>
-   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>Password</label>
-   <input 
-   type="password" 
-   required 
-   onChange={handleChange} 
-   name="password" 
-   value={password}
-   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-   />
-   </div>
+        <div className=' relative group appearance-none'>
+          <input 
+            type="number" 
+            required 
+            onChange={handleChange} 
+            name="phone" 
+            value={phone}
+            className="appearance-none border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
+          />
+          <label  
+          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Phone Number</label>
+        </div>
 
-    <div className='flex flex-col my-3 items-start'>
-   <label  className='block mb-2 text-sm font-medium text-gray-900 font-inter'>confirm Password</label>
-   <input 
-   type="password" 
-   required 
-   onChange={handleChange} 
-   name="confirm_Password" 
-   value={confirm_Password}
-   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-   />
-   </div>
-   <button  
-   type="submit"
-   className='w-[200px] py-2 text-lg text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br rounded-md'
-   > Sign Up</button>
-   </form>
-   </div>
+        <div className=' relative group'>
+          <input 
+            type="email" 
+            required 
+            onChange={handleChange} 
+            name="email" 
+            value={email}
+            className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
+          />
+          <label  
+          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Email</label>
+        </div>
+
+        <div className=' relative group'>
+          <input 
+          type="password" 
+          required 
+          onChange={handleChange} 
+          name="password" 
+          value={password}
+          className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
+          />
+          <label  
+          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Password</label>
+        </div>
+
+        <div className=' relative group'>
+          <input 
+          type="password" 
+          required 
+          onChange={handleChange} 
+          name="confirm_Password" 
+          value={confirm_Password}
+          className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
+          />
+          <label  
+          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>confirm Password</label>
+        </div>
+
+        <div className='flex flex-col justify-start items-start gap-2'>
+
+          <div className='flex justify-center gap-2'>
+          <input type="checkbox" name="" id="" />
+          <span className='text-xs text-gray-600'>I agree to the Terms and Condition.</span>
+          </div>
+          <div className='flex justify-center gap-2'>
+          <input type="checkbox" name="" id="" />
+          <span className='text-xs text-gray-600'>I agree to Promotional messages.</span>
+          </div>
+        </div>
+
+        <button  
+          type="submit"
+          className='w-[128px] py-2 text-white bg-register-btn rounded-full text-sm font-semibold mx-auto'
+        > Sign Up</button>
+
+        </form>
+
+      </div>
    <Outlet />
   </div>
   )

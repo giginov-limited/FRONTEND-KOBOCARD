@@ -27,7 +27,7 @@ function App() {
            <Route path='sign-in' element ={<SignIn />} />
            <Route path='SignInWithPhoneNumber' element ={<SignInWithPhoneNumber />} />
            <Route path='card/:cardId' element ={<CardDescription/>} />
-           <Route path='Pay/:cardId' element= {<UserPay />} />
+
 
            <Route element={<RequireAuth />}>
             <Route path='welcome' element={<LoginPage />} />
@@ -35,6 +35,7 @@ function App() {
             <Route path='account-page' element={<AccountPage />} />
             <Route path='wallet' element={<UserWallet />} />
             <Route path='dashboard' element={<Dashboard />} />
+            <Route path='Pay/:cardId' element= {<UserPay />} />
            </Route>
            </Route>
          </Routes>
