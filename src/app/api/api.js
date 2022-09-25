@@ -4,7 +4,7 @@ import { setCredits,logOut,setRefreshToken } from '../../features/authSlice'
 
 //Base endpoint plus header
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://kobocard-dev.herokuapp.com',
+    baseUrl: 'http://localhost:8080',
     credentials: 'omit',
     mode:'cors',
     prepareHeaders: (headers, { getState }) => {

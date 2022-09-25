@@ -33,6 +33,7 @@ const Navigation =() => {
 
   const navigateToAccountPage = () => navigate('/account-page')
   const navigateToWalletPage = () => navigate('/wallet')
+  const navigateToKardHistory = () => navigate('/game-history')
 
   const styles = {
     width: "44px",
@@ -77,7 +78,7 @@ const Navigation =() => {
           {dropdownToggle ? <div className='absolute w-[200px] top-14 right-0 z-30 bg-dropdown-bg rounded shadow-md'>
             <ul className='space-y-2'>
               <li className='cursor-pointer hover:bg-gray-500 py-2' onClick={navigateToAccountPage}>Account</li>
-              <li className='cursor-pointer hover:bg-gray-500 py-2' >Draw history</li>
+              <li className='cursor-pointer hover:bg-gray-500 py-2' onClick={navigateToKardHistory}>Draw history</li>
               <li className='cursor-pointer hover:bg-gray-500 py-2' >Support</li>
               <li onClick={logOuthandler} className='cursor-pointer hover:bg-gray-500 py-2' > Log Out</li>
             </ul>

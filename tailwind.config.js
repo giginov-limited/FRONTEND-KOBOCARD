@@ -28,6 +28,8 @@ module.exports = {
         "play-btn":"#05C718",
         "paystack-btn": "#EEBC58",
         "Fund-wallet": "#373737",
+        "kard-history-price": "#505050",
+        "More-info-btn": "#24A558",
       },
       
       fontFamily: {

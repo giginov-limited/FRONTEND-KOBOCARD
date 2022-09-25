@@ -164,7 +164,7 @@ const Info = ({value}) => {
               className= "appearance-none mx-2 text-lg"
                 >
                 <option>{user.country}</option>
-                {countries.map((country)=> {return <option value={country.isoCode} key={country.isoCode} name='country' >{country.name}</option>})}
+                {countries.map((country)=> {return <option value={country.isoCode} key={country.isoCode} name='country' className="py-1 rounded-md">{country.name}</option>})}
               </select>
             </div>
 
