@@ -24,7 +24,7 @@ const SignIn = () => {
 
   //Navigation function to different pages
   const navigateToSignInWithPhoneNumber = () =>{ navigate('/SignInWithPhoneNumber')}
-  const navigateToWelcomePage = () => {navigate('/welcome')}
+  const navigateToWelcomePage = () => {navigate('/dashboard')}
     
   
   //reset formfeilds 
@@ -110,7 +110,7 @@ const SignIn = () => {
                 autoComplete='off'
                 name='email'
                 required 
-                className="appearance-none border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5 sm:text-sm"
+                className="appearance-none border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5 sm:text-sm bg-transparent"
                 />
                 <label 
                 className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Email</label>

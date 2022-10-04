@@ -1,5 +1,5 @@
-import { useGetAllCardGamesQuery } from '../../app/api/authApiSlice';
-import Loading from '../Loading/Loading.Component';
+import { useGetAllCardGamesQuery } from '../../../app/api/authApiSlice';
+import Loading from '../../Loading/Loading.Component';
 import { useNavigate } from 'react-router-dom';
 
 const OngoingCardGames = () =>{

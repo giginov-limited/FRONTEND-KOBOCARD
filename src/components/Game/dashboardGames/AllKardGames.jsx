@@ -1,7 +1,7 @@
-import { useGetAllCardGamesQuery } from '../../app/api/authApiSlice';
-import Countdown from '../countDown/countdown';
+import { useGetAllCardGamesQuery } from '../../../app/api/authApiSlice';
+import Countdown from '../../countDown/countdown';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../Loading/Loading.Component';
+import Loading from '../../Loading/Loading.Component';
 
 
 const AllCardGames = () => {

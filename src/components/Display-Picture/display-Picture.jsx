@@ -1,4 +1,5 @@
 import { useGetUserDetailsQuery } from "../../app/api/authApiSlice";
+import Loading from '../Loading/Loading.Component'
 
 
 const Pic = ({user,styles}) => {
@@ -25,7 +26,7 @@ const DisplayPicture = ({styles})=>{
     
     
       let postContent = isLoading?(<>
-      <div>loadingg</div>
+      <Loading />
       </>):isSuccess?(<Pic {...data} styles={styles} />):
       console.log(isError)
     

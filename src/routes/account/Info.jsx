@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './accountpage.styles.scss'
 import { Country,State} from "country-state-city";
 import { useUpdateUserDetailsMutation} from "../../app/api/authApiSlice";
 import { useEffect } from "react";
@@ -164,7 +163,7 @@ const Info = ({value}) => {
               className= "appearance-none mx-2 text-lg"
                 >
                 <option>{user.country}</option>
-                {countries.map((country)=> {return <option value={country.isoCode} key={country.isoCode} name='country' >{country.name}</option>})}
+                {countries.map((country)=> {return <option value={country.isoCode} key={country.isoCode} name='country' className="py-1 rounded-md">{country.name}</option>})}
               </select>
             </div>
 
