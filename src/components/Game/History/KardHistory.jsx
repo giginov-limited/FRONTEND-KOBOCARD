@@ -48,7 +48,7 @@ const KardPagenationComponent = ({games}) => {
     //variable to store the current page index
     const [currentPage, setCurrentPage] = useState(1);
     //post per page
-    const [postsperpage, setPostPerPage] = useState(8);
+    const [postsperpage, setPostPerPage] = useState(4);
 
     //variable to get index of the last post in a page
     //Note these variables changes bases on the current page which is determine by the paginate func
@@ -68,7 +68,7 @@ const KardPagenationComponent = ({games}) => {
     let pageContent = 
     <>
     <KardDetails value={currentPosts}/>
-    <Pagination postsPerPage={postsperpage} totalPosts={games.length} paginate={paginate}/>
+    <Pagination postsPerPage={postsperpage} totalPosts={games.length} paginate={paginate} currentPage={currentPage}/>
     </>;
 
 

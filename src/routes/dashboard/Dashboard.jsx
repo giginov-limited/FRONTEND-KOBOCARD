@@ -1,14 +1,12 @@
 import React from 'react'
 import { useGetUserDetailsQuery } from '../../app/api/authApiSlice';
-import AllCardGames from '../AllCardsGames/AllCardGames';
-import Loading from '../Loading/Loading.Component';
+import AllCardGames from '../../components/Game/dashboardGames/AllKardGames';
+import Loading from '../../components/Loading/Loading.Component';
 import bet from '../../assets/bet.jpg'
 import bett from '../../assets/bett.svg'
-import './login.styles.scss'
 
 
-
-const LoginPage = () => {
+const Dashboard = () => {
   const {data, isLoading, isError, error, isSuccess,refetch} = useGetUserDetailsQuery();
 
   
@@ -87,4 +85,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default Dashboard

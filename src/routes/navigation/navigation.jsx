@@ -1,10 +1,12 @@
 import React, {Fragment, useState} from 'react';
 import {Outlet, Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { useGetUserDetailsQuery } from '../../app/api/authApiSlice';
-import { logOut } from '../../features/authSlice';
-import './navigation.style.scss'
+import { logOut } from '../../features/authSlice'; 
 import DisplayPicture from '../../components/Display-Picture/display-Picture';
+import theme from '../../assets/THEMES scvg.png'
+import usericon from '../../assets/user-icon.svg'
+import drawIcon from '../../assets/draw-history.svg'
+import logOutIcon from "../../assets/logOut.svg"
 
 const Navigation =() => {
   const navigate = useNavigate();
@@ -20,6 +22,8 @@ const Navigation =() => {
   const user = useSelector((state)=> state.auth.user)
 
   const [dropdownToggle, setDropdownToggle] = useState(false)
+  //Remember to added toggle functionalites to the window
+  //so when the user clicks outside the dropdown it clears
 
   const setDropdown=()=>{
     setDropdownToggle(!dropdownToggle);
@@ -31,9 +35,10 @@ const Navigation =() => {
      dispatch(logOut())
   }
 
-  const navigateToAccountPage = () => navigate('/account-page')
+  const navigateToAccountPage = () => navigate('/account')
   const navigateToWalletPage = () => navigate('/wallet')
   const navigateToKardHistory = () => navigate('/game-history')
+  const navigateToDashboard = () => navigate('/dashboard')
 
   const styles = {
     width: "44px",
@@ -42,10 +47,11 @@ const Navigation =() => {
   return(
 
     <Fragment>
-      <div className= "w-full flex justify-between gap-4">
+      <div className= "w-full flex justify-between ">
 
-      <Link className="self-end" to ='/'>
-      <span className="self-center text-3xl text-black font-semibold font-inter italic px-1 ">KoboCard</span>
+      <Link className="self-center max-w-[11%] mx-auto" to ='/'>
+      {/* <span className="self-center text-3xl text-black font-semibold font-inter italic px-1 ">KoboCard</span> */}
+      <img src={theme} alt="" className='mx-2 h-[60px]'/>
       </Link>
       
       <div className='bg-nav-bg w-[88%] flex justify-around items-center py-2 rounded-tl-full'>
@@ -62,7 +68,7 @@ const Navigation =() => {
               <span className="sr-only">Search icon
               </span>
           </div>
-          <input type="text" id="search-navbar" class="block p-2 pl-10 w-full  rounded-full border border-gray-300 sm:text-sm focus:outline-none" placeholder="Search..." />
+          <input type="text" id="search-navbar" className="block p-2 pl-10 w-full  rounded-full border border-gray-300 sm:text-sm focus:outline-none" placeholder="Search..." />
         </div>
 
           {
@@ -75,12 +81,39 @@ const Navigation =() => {
           <div className='h-12 w-12 rounded-full'>
           <DisplayPicture styles={styles}/>
           </div>
-          {dropdownToggle ? <div className='absolute w-[200px] top-14 right-0 z-30 bg-dropdown-bg rounded shadow-md'>
-            <ul className='space-y-2'>
-              <li className='cursor-pointer hover:bg-gray-500 py-2' onClick={navigateToAccountPage}>Account</li>
-              <li className='cursor-pointer hover:bg-gray-500 py-2' onClick={navigateToKardHistory}>Draw history</li>
-              <li className='cursor-pointer hover:bg-gray-500 py-2' >Support</li>
-              <li onClick={logOuthandler} className='cursor-pointer hover:bg-gray-500 py-2' > Log Out</li>
+          {dropdownToggle ? <div className='absolute w-[200px] top-14 right-0 z-30 bg-white rounded-b-lg shadow-lg'>
+            <ul className='space-y-4 px-6'>
+
+              <li className='cursor-pointer py-2 group text-black transition-all duration-300 ease-in-out' onClick={navigateToDashboard}>
+                <div className='bg-left-bottom bg-gradient-to-r flex justify-between py-1 pr-1 from-black to-black bg-[length:0%_1px] bg-no-repeat group-hover:bg-[length:100%_1px] transition-all duration-500 ease-out'>
+                  <span>Dashboard</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#008092" className="w-5 h-5">
+                    <path fillRule="evenodd" d="M2 6.75A.75.75 0 012.75 6h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 6.75zm0 6.5a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+                    <path fillRule="evenodd" d="M2 6.75A.75.75 0 012.75 6h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 6.75zm0 6.5a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </li>
+
+              <li className='cursor-pointer py-2 group text-black transition-all duration-300 ease-in-out' onClick={navigateToAccountPage}>
+                <div className='py-1 flex justify-between gap-2 bg-left-bottom bg-gradient-to-r from-black to-black bg-[length:0%_1px] bg-no-repeat group-hover:bg-[length:100%_1px] transition-all duration-500 ease-out'>
+                  <span>User Account</span>
+                <img src={usericon} alt="" />
+                </div>
+              </li>
+
+              <li className='cursor-pointer py-2 group text-black transition-all duration-300 ease-in-out' onClick={navigateToKardHistory}>
+              <div className='py-1 flex justify-between gap-2 bg-left-bottom bg-gradient-to-r from-black to-black bg-[length:0%_1px] bg-no-repeat group-hover:bg-[length:100%_1px] transition-all duration-500 ease-out'>
+              <span>Draw History</span>
+              <img src={drawIcon} alt="" />
+              </div>
+              </li>
+
+              <li onClick={logOuthandler} className="cursor-pointer">
+                <div className='flex justify-end items-center gap-2 text-xs font-semibold my-2'>
+                  logOut 
+                  <img src={logOutIcon} alt=""  />
+                </div>
+              </li>
             </ul>
           </div> : null}
           </div>

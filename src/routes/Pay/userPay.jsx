@@ -102,7 +102,7 @@ const UserPay =()=>{
 
 
     let content = isLoading?<Loading />:isSuccess?
-    (<Details value={data.wallet} {...refetch}/>):console.log('error');
+    (<Details value={data.wallet} refetch ={refetch} />):console.log('error');
 
     return (
     <>

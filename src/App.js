@@ -8,13 +8,13 @@ import SignUp from './components/sign-up/sign-up.component.jsx'
 import SignIn from './components/sign-in/sign-in.component.jsx'
 import SignInWithPhoneNumber from './components/sign-in/sign-in-PhoneNum.component'
 import RequireAuth from './features/RequireAuth'
-import LoginPage from './components/login-page/loginPage';
-import AccountPage from './routes/user/accountPage';
-import FetchData from './routes/user/UserPage';
+import Dashboard from './routes/dashboard/Dashboard';
+import AccountPage from './routes/account/Account';
 import CardDescription from './routes/CardGameDescription/CardGameInfo';
 import UserWallet from './routes/wallet/wallet';
 import UserPay from './routes/Pay/userPay';
 import KardHistory from './components/Game/History/KardHistory';
+import NotFound from './routes/404/404.component';
 
 function App() {
   return (
@@ -27,12 +27,12 @@ function App() {
            <Route path='sign-in' element ={<SignIn />} />
            <Route path='SignInWithPhoneNumber' element ={<SignInWithPhoneNumber />} />
            <Route path='card/:cardId' element ={<CardDescription/>} />
+           <Route path='*' element={<NotFound />} />
 
 
            <Route element={<RequireAuth />}>
-            <Route path='welcome' element={<LoginPage />} />
-            <Route path='user' element={<FetchData />}  />
-            <Route path='account-page' element={<AccountPage />} />
+            <Route path='dashboard' element={<Dashboard />} />
+            <Route path='account' element={<AccountPage />} />
             <Route path='wallet' element={<UserWallet />} />
             <Route path='game-history' element={<KardHistory />} />
             <Route path='Pay/:cardId' element= {<UserPay />} />

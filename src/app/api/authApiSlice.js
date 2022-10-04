@@ -13,7 +13,7 @@ export const authApiSlice = signInApi.injectEndpoints({
             query: credentials => ({
                 url: '/users/signinEmail',
                 method: 'POST',
-                body: { ...credentials },
+                body: {...credentials },
             })
         }),
         loginWithPhoneNumber: builder.mutation({

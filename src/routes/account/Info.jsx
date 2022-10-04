@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './accountpage.styles.scss'
 import { Country,State} from "country-state-city";
 import { useUpdateUserDetailsMutation} from "../../app/api/authApiSlice";
 import { useEffect } from "react";

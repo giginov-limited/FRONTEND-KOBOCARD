@@ -1,9 +1,11 @@
 import {Outlet, useNavigate} from 'react-router-dom';
-import axios from 'axios';
 import {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { useSignUpMutation } from '../../app/api/authApiSlice';
 
 const SignUp = () => {
+
+  const [signUp] = useSignUpMutation()
   
   const defaultformfields = {
   'first_name':'',
@@ -40,11 +42,9 @@ const SignUp = () => {
     if(password === confirm_Password) {
     event.preventDefault();
     try {
-      await axios.post('https://kobo-card.herokuapp.com/users/signup', form)
-        .then(res => {
-          navigateToSignIn();
-          resetFormfields();
-        });
+      await signUp(form)
+      resetFormfields()
+      navigateToSignIn();
     } catch (err) {
       if(!err?.response){
         setErrMsg('No server Response')

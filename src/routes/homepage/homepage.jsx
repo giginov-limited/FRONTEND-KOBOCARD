@@ -1,8 +1,6 @@
-import {Outlet} from 'react-router-dom';
 import Navigation from '../navigation/navigation'
 import CountdownTimer from '../../components/countDown/countdown-timer';
-import OngoingCardGames from '../../components/Ongoing-Card-Games/OngoingCard.component';
-import Extra from '../../components/Extras/extras';
+import OngoingCardGames from '../../components/Game/ongoing/OngoingCard.component';
 import pic from '../../assets/home.jpg'
 
 const Home = () => {
@@ -13,11 +11,11 @@ const Home = () => {
       <div className='flex justify-end items-center overflow-hidden h-[400px] gap-1'>
 
         <svg width="10" height="237" viewBox="0 0 10 237" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="5.96597" y1="4.03375" x2="4.03376" y2="232.034" stroke="#101A1C" stroke-width="8" stroke-linecap="round"/>
+          <line x1="5.96597" y1="4.03375" x2="4.03376" y2="232.034" stroke="#101A1C" strokeWidth="8" strokeLinecap="round"/>
         </svg>
 
         <svg width="8" height="313" viewBox="0 0 8 313" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="4" y1="4" x2="3.99999" y2="309" stroke="#EEBC58" stroke-width="8" stroke-linecap="round"/>
+          <line x1="4" y1="4" x2="3.99999" y2="309" stroke="#EEBC58" strokeWidth="8" strokeLinecap="round"/>
         </svg>
 
         <div className='bg-btn-bg w-[88%] relative bg-no-repeat bg-cover h-full'
@@ -40,10 +38,6 @@ const Home = () => {
       </div>
     <OngoingCardGames />
     <CountdownTimer CountdownTimestampMs={1672576160000}/>
-    
-    {/* <Extra /> */}
-    <Outlet />
-    
     </div>
   )
 }
