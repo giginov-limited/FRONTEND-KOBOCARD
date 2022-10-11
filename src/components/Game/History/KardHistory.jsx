@@ -45,6 +45,7 @@ const KardDetails = ({value}) =>{
 
 
 const KardPagenationComponent = ({games}) => {
+    
     //variable to store the current page index
     const [currentPage, setCurrentPage] = useState(1);
     //post per page
@@ -56,7 +57,12 @@ const KardPagenationComponent = ({games}) => {
     //var for first post of a page
     const indexOfFirstPost = indexOfLastPost - postsperpage;
     //Var for the current post of a page
-    const currentPosts = games.slice(indexOfFirstPost, indexOfLastPost);//Remeber to fix error, when there are zero card games
+    let  currentPosts;
+    if(games) {
+         currentPosts = games.slice(indexOfFirstPost, indexOfLastPost);//Remeber to fix error, when there are zero card games
+    }else{
+         currentPosts = [];
+    }
 
     //function to set the current page based on the indexes and algorithm in pagination
     const paginate = (pageNumber) => {
@@ -78,7 +84,7 @@ const KardPagenationComponent = ({games}) => {
 const KardHistory  = () => {
 
     //Fetch data from api
-    const {data, isLoading, isSuccess, isError} = useGetUserGamesQuery()
+    const {data, isLoading, isSuccess, isError, error} = useGetUserGamesQuery()
 
     //pass down the value
     let kardContent = isLoading?(<>
@@ -88,8 +94,7 @@ const KardHistory  = () => {
             <span className="py-6 text-4xl font-bold  text-black">Kard Game History</span> 
             <KardPagenationComponent {...data} />
             </div>
-        ):
-        console.log(isError);
+        ):<h3>{error}</h3>
 
     return kardContent
 
