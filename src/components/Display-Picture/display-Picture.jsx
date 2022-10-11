@@ -4,7 +4,6 @@ import Loading from '../Loading/Loading.Component'
 
 const Pic = ({user,styles}) => {
     const {picture} = user
-    // console.log(height)
     return(
         <>
         <img src={picture} alt="" className="h-11 w-11 rounded-full"

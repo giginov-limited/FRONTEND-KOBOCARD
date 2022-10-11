@@ -28,7 +28,6 @@ const Info = (props) => {
                         &#8358;
                         {game.price}  
                     </span>  
-                      
                     <button className="bg-register-btn rounded-full shadow-sm text-white py-3 w-[181px] mx-auto">
                     Play Now
                     </button>

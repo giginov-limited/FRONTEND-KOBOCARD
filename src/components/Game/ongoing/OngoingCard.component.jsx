@@ -19,37 +19,34 @@ const OngoingCardGames = () =>{
 
   let content = 
   isLoading?<Loading /> :
-  isSuccess?
-  (data.games.map((game)=>{
+  isSuccess?( data.games?
+    data.games.map((game)=>{
 
-    colors.forEach((e)=>{
-      // console.log( Math.random())
-    })
 
-    return(
-  <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 h-[200px] rounded-2xl w-full shadow-lg"  key= {game.id}>
-    <div className='bg-white rounded-2xl h-[180px] w-full  text-black  p-2 '>
-      <div className='w-[80%] h-full flex flex-col justify-around items-start mx-auto '>
-    <span className={``}>{game.title}</span>
-    <span className='text-3xl font-semibold'>{game.price}</span>
-    <div className='flex justify-between w-full px-1'>
-        <button 
-        type="button" 
-        className="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br font-medium rounded-full text-sm px-5 py-2 text-center mr-2 mb-2"
-        onClick={() =>navigateToCardsHandler(game.id)}
-        >More Info</button>
-        <button  
-        className='font-medium rounded-full text-play-btn text-sm px-5 py-2 text-center mr-2 mb-2 border border-play-btn hover:bg-play-btn hover:border-white hover:text-white'
-        onClick={()=> navigateToPayHandler(game.id)} 
-        >Play now</button>
-    </div>
+      return(
+      <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 h-[200px] rounded-2xl w-full shadow-lg"  key= {game.id}>
+        <div className='bg-white rounded-2xl h-[180px] w-full  text-black  p-2 '>
+          <div className='w-[80%] h-full flex flex-col justify-around items-start mx-auto '>
+            <span className={``}>{game.title}</span>
+            <span className='text-3xl font-semibold'>{game.price}</span>
+            <div className='flex justify-between w-full px-1'>
+            <button 
+              type="button" 
+              className="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br font-medium rounded-full text-sm px-5 py-2 text-center mr-2 mb-2"
+              onClick={() =>navigateToCardsHandler(game.id)}
+            >More Info</button>
+            <button  
+            className='font-medium rounded-full text-play-btn text-sm px-5 py-2 text-center mr-2 mb-2 border border-play-btn hover:bg-play-btn hover:border-white hover:text-white'
+            onClick={()=> navigateToPayHandler(game.id)} 
+            >Play now</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-    )
-  }))
- :
- (console.log(error))
+      )
+    }): <h3>No Games </h3>)
+
+ : <h3>{error}</h3>
 
  
 
@@ -64,3 +61,4 @@ const OngoingCardGames = () =>{
 }
 
 export default OngoingCardGames;
+
