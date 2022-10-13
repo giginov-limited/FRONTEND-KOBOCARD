@@ -1,12 +1,29 @@
 import { useParams } from "react-router-dom"
 import { useGetCardGamesByIdQuery } from "../../app/api/authApiSlice";
+import { useNavigate } from "react-router-dom";
 import Countdown from "../../components/countDown/countdown";
 import Loading from "../../components/Loading/Loading.Component";
+import Buttons from "../../components/Button";
 import './card.style.scss'
 
+const style = {
+    backgroundColor:"#008092",
+    borderRadius: "100px",
+    width: "150px",
+    "&:hover":{
+        backgroundColor:"#008092",
+        opacity:0.9,
+    }
+}
 
 const Info = (props) => {
-    const {game} = props
+    const {game,id} = props
+
+    const navigate = useNavigate()
+
+    const navigateToPayHandler = () =>{
+        navigate(`/Pay/:${id}`)
+    }
 
     return(
        <>
@@ -27,10 +44,10 @@ const Info = (props) => {
                     <span className='text-5xl mt-2 text-Fund-wallet font-semibold'>
                         &#8358;
                         {game.price}  
-                    </span>  
-                    <button className="bg-register-btn rounded-full shadow-sm text-white py-3 w-[181px] mx-auto">
-                    Play Now
-                    </button>
+                    </span>
+                    <div className='flex justify-center items-center'>
+                    <Buttons variant="contained" text="Play Now" style={style} onClick={navigateToPayHandler}/>  
+                    </div>
                 </div>
                </div>
             </div>
@@ -52,7 +69,7 @@ const CardDescription = () => {
 
     let kardContent = 
     isLoading?<Loading />:
-    isSuccess? <Info {...data} />:
+    isSuccess? <Info {...data} id={id}/>:
     isError?<p>{error}</p>:null;
 
     return kardContent

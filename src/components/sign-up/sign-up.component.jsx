@@ -2,11 +2,53 @@ import {Outlet, useNavigate} from 'react-router-dom';
 import {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useSignUpMutation } from '../../app/api/authApiSlice';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import TextField from '@mui/material/TextField';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Buttons from '../Button';
+import Notifications from '../Notification';
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#F1C36C',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'green',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#F1C36C',
+    },
+    '&:hover fieldset': {
+      borderColor: '#F1C36C',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#F1C36C',
+    },
+  },
+});
+
+const SubmitBtn = {
+  width: "128px",
+  height: "46px",
+  color:"#FFFF",
+  background:"#008092",
+  borderRadius: "50px",
+  '&:hover':{
+    background:"#008092",
+  }
+}
 
 const SignUp = () => {
 
-  const [signUp] = useSignUpMutation()
-  
+  const [signUp, {isSuccess,isError,error}] = useSignUpMutation()
+  const [open, setOpen] = useState(false)
   const defaultformfields = {
   'first_name':'',
   'last_name':'',
@@ -15,11 +57,17 @@ const SignUp = () => {
   'password':'',
   'confirm_Password':''
 }
-
+  const [showpwd, setShowpwd] = useState(false)
   const [formFields, setFormFields] = useState(defaultformfields);
   const {first_name,last_name,phone, email, password,confirm_Password} = formFields;
 
+
+
   const [errMsg, setErrMsg] = useState('')
+
+  const handleClickShowPassword = () => {
+    setShowpwd(!showpwd)
+  };
 
 
   const resetFormfields = () => {
@@ -31,35 +79,26 @@ const SignUp = () => {
     navigate('/sign-in')
   }
 
-  useEffect(()=> {
-    setErrMsg('')
-},[formFields])
+  const valid = password == confirm_Password
   
 
   const form = {first_name,last_name,phone,email,password};
 
   async function handleSubmit(event) {
-    if(password === confirm_Password) {
     event.preventDefault();
     try {
-      await signUp(form)
+      const res = await signUp(form)
       resetFormfields()
       navigateToSignIn();
     } catch (err) {
-      if(!err?.response){
-        setErrMsg('No server Response')
-      }else if (err.response?.status === 500){
-        setErrMsg('Email or Phone number already in use')
-      }else if (err.response?.status === 401) {
-        setErrMsg('Unauthorized')
-      } else {
-        setErrMsg('Sign up Failed')
+      if(err?.data){
+        setOpen(true)
+        setErrMsg(err.data.error.Message)
+      }if(err.status){
+        setOpen(true)
+        setErrMsg(err.status)
+      }
     }
-    };
-
-  }else{
-    prompt("Password ain't correct")
-  };
 }
 
 
@@ -80,109 +119,106 @@ const SignUp = () => {
         <h2 className='text-4xl my-2 font-semibold'>Create Account</h2>
         <p className='text-sm my-3 opacity-30'>Enter the following credentials to create your account</p>
 
-        {errMsg? <p className='error'>{errMsg}</p>:null}
-
         <form className='w-[450px] flex flex-col my-3 gap-6' onSubmit={handleSubmit}>
 
-        <div className=' relative group'>
-          <input 
-            label='first Name'
-            type="text" 
-            required 
-            onChange={handleChange} 
-            name="first_name" 
-            value={first_name}
-            className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
-          />
-          <label 
-          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>First Name</label>
-        </div>
+          <CssTextField 
+          label="First Name" 
+          id="custom-css-outlined-input" 
+          size='small'
+          onChange={handleChange} 
+          name="first_name" 
+          value={first_name} 
+          required/>
 
-        <div className=' relative group'>
-          <input
-            type="text"
-            required 
-            onChange={handleChange} 
-            name="last_name" 
-            value={last_name}
-            className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
-          />
-          <label  
-          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Last Name</label>
-        </div>
+          <CssTextField 
+          label="Last Name" 
+          id="custom-css-outlined-input" 
+          size='small'
+          onChange={handleChange} 
+          name="last_name" 
+          value={last_name}
+          required/>
 
-        <div className=' relative group appearance-none'>
-          <input 
-            type="number" 
-            required 
-            onChange={handleChange} 
-            name="phone" 
-            value={phone}
-            className="appearance-none border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
-          />
-          <label  
-          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Phone Number</label>
-        </div>
+          <CssTextField 
+          label="Phone" 
+          id="custom-css-outlined-input" 
+          size='small'
+          onChange={handleChange} 
+          name="phone" 
+          value={phone}
+          required/>
 
-        <div className=' relative group'>
-          <input 
-            type="email" 
-            required 
-            onChange={handleChange} 
-            name="email" 
-            value={email}
-            className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
-          />
-          <label  
-          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Email</label>
-        </div>
+          <CssTextField 
+          label="Email" 
+          id="custom-css-outlined-input"
+          type='email' 
+          size='small'
+          onChange={handleChange} 
+          name="email" 
+          value={email}
+          required/>
 
-        <div className=' relative group'>
-          <input 
-          type="password" 
-          required 
+          <CssTextField
+          required
+          error={!valid}
+          helperText={!valid?"Confirm Password":""}
+          label="Password"
+          id="password"
+          type={showpwd ? 'text' : 'password'}
           onChange={handleChange} 
           name="password" 
           value={password}
-          className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
-          />
-          <label  
-          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Password</label>
+          size='small'
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                edge="end"
+              >
+                {showpwd ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+
+        <CssTextField
+        required
+        error={!valid}
+        helperText={!valid?"Confirm Password":""}
+        label="Confirm password"
+        id="Confirm password"
+        type={showpwd ? 'text' : 'password'}
+        onChange={handleChange} 
+        name="confirm_Password" 
+        value={confirm_Password}
+        size='small'
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              edge="end"
+            >
+              {showpwd ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        }
+      />
+
+        <FormGroup>
+        <FormControlLabel control={<Checkbox />} label="I agree to the Terms and Condition." sx={{ 'MuiTypography-root':{fontSize:10},'& .MuiSvgIcon-root': { fontSize: 16 } }}/>
+        <FormControlLabel control={<Checkbox />} label="I agree to Promotional messages."  sx={{ 'MuiTypography-root':{fontSize:10},'& .MuiSvgIcon-root': { fontSize: 16 } }}/>
+        </FormGroup>
+
+        <div className='w-full flex justify-center items-center'>
+        <Buttons variant="contained" style={SubmitBtn} text="Sign Up" type="submit" disable={!valid}/>
         </div>
-
-        <div className=' relative group'>
-          <input 
-          type="password" 
-          required 
-          onChange={handleChange} 
-          name="confirm_Password" 
-          value={confirm_Password}
-          className="border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5"
-          />
-          <label  
-          className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>confirm Password</label>
-        </div>
-
-        <div className='flex flex-col justify-start items-start gap-2'>
-
-          <div className='flex justify-center gap-2'>
-          <input type="checkbox" name="" id="" />
-          <span className='text-xs text-gray-600'>I agree to the Terms and Condition.</span>
-          </div>
-          <div className='flex justify-center gap-2'>
-          <input type="checkbox" name="" id="" />
-          <span className='text-xs text-gray-600'>I agree to Promotional messages.</span>
-          </div>
-        </div>
-
-        <button  
-          type="submit"
-          className='w-[128px] py-2 text-white bg-register-btn rounded-full text-sm font-semibold mx-auto'
-        > Sign Up</button>
 
         </form>
 
       </div>
+      <Notifications open={open} setOpen={setOpen} text={errMsg} severity="error" />
    <Outlet />
   </div>
   )

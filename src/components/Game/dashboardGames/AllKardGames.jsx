@@ -2,6 +2,28 @@ import { useGetAllCardGamesQuery } from '../../../app/api/authApiSlice';
 import Countdown from '../../countDown/countdown';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../Loading/Loading.Component';
+import Buttons from '../../Button';
+
+const moreInfoStyle =  {
+    background: "#828282",
+    borderRadius: "100px",
+    padding:"5px 30px",
+    "&:hover":{
+      backgroundColor:"rgba(130, 130, 130, 0.9)"
+    }
+  }
+  
+  const playNowStyle =  {
+    border: "1px solid #05C718",
+    borderRadius: "100px",
+    padding:"5px 30px",
+    color:"#05C718",
+    "&:hover":{
+      backgroundColor:"rgba(5, 199, 24, 0.1)",
+      border: "1px solid #05C718",
+      color:"#05C718"
+    }
+  }
 
 
 const AllCardGames = () => {
@@ -24,7 +46,7 @@ const AllCardGames = () => {
             const startEnd = Number(game.start_time + '000');
         
         return(
-              <div className='flex justify-evenly items-center gap-8 rounded my-5 py-6 px-3 w-full shadow-xl' key= {game.id}>
+              <div className='flex justify-evenly items-center gap-8 rounded my-5 py-6 px-3 w-full shadow-lg' key= {game.id}>
                  <img className='max-h-[159px]' src="https://images.unsplash.com/photo-1584936684506-c3a7086e8212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80" alt="pic" />
                     <div className='h-[143px] flex flex-col justify-between p-1 font-inter gap-3'>
                         <div className='pt-2 flex flex-col justify-around items-start'>
@@ -34,16 +56,9 @@ const AllCardGames = () => {
                          </div>
                         </div>
         
-                        <div className='flex justify-between'>
-        
-                        <button
-                         className=' text-black p-1 rounded-xl border border-register-btn'
-                         onClick={() =>navigateToCardsHandler(game.id)}>More Info
-                        </button>
-        
-                        <button
-                        className='bg-btn-bg p-1 rounded-xl text-white py-2'
-                        onClick={()=> navigateToPayHandler(game.id)}>Play Now</button>
+                        <div className='flex justify-between gap-3'>
+                        <Buttons variant="contained" style={moreInfoStyle} text="More Info" onClick={() =>navigateToCardsHandler(game.id)} size='small'/>
+                        <Buttons variant="outlined" style={playNowStyle} text="Play Now" onClick={()=> navigateToPayHandler(game.id)} size='small'/>
                         </div>
                     </div>
         

@@ -4,6 +4,7 @@ export const initialState = {
     token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')):null,
     refreshToken: localStorage.getItem('refreshToken') ? JSON.parse(localStorage.getItem('refreshToken')):null,
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')):null,
+    session:null,
 }
 
 const authSlice = createSlice({
@@ -32,6 +33,9 @@ const authSlice = createSlice({
             localStorage.setItem('token', JSON.stringify(state.token));
             localStorage.setItem('refreshToken', JSON.stringify(state.refreshToken));
         },
+        setTimeOutMsg:(state,action) =>{
+            state.session = action.payload
+        },
         logOut: (state) => {
             state.user = null
             state.token = null
@@ -42,7 +46,7 @@ const authSlice = createSlice({
     },
 })
 
-export const {setCredits,setUserDetails, logOut, setRefreshToken} = authSlice.actions
+export const {setCredits,setUserDetails, logOut, setRefreshToken, setTimeOutMsg} = authSlice.actions
 export default authSlice.reducer
 
 

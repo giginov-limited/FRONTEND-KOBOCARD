@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setCredits,logOut,setRefreshToken } from '../../features/authSlice'
+import { setCredits,logOut,setRefreshToken , setTimeOutMsg} from '../../features/authSlice'
 
 
 //Base endpoint plus header
@@ -9,12 +9,9 @@ const baseQuery = fetchBaseQuery({
     mode:'cors',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token
-      console.log(token)
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
-      }else {
-        console.log('no token')
       }
 
       return headers
@@ -42,7 +39,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       // retry the initial query
       result = await baseQuery(args, api, extraOptions)
     } else {
+      api.dispatch(setTimeOutMsg("Session Time Out"))
       api.dispatch(logOut())
+      api.dispatch(setTimeOutMsg(null))
     }
   }
   return result

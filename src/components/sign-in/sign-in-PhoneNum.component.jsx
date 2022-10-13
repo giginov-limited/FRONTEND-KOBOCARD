@@ -1,14 +1,74 @@
 import {Outlet , useNavigate} from 'react-router-dom';
 import { useLoginWithPhoneNumberMutation } from '../../app/api/authApiSlice';
 import { setCredits } from '../../features/authSlice';
-import { useDispatch , useSelector} from 'react-redux/es/exports';
+import { useDispatch} from 'react-redux/es/exports';
 import {useState, useRef, useEffect} from 'react';
-import './sign-in.styles.scss'
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import TextField from '@mui/material/TextField';
+import Buttons from '../Button';
 import Loading from '../Loading/Loading.Component';
+import Notifications from '../Notification';
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#F1C36C',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'green',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#F1C36C',
+    },
+    '&:hover fieldset': {
+      borderColor: '#F1C36C',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#F1C36C',
+    },
+  },
+});
+
+const signInSwitchBtn = {
+  backgroundColor: "#008092",
+  borderRadius: "0px 10px 0px 0px",
+  "&:hover":{
+    backgroundColor: "rgba(0, 128, 146, 0.9)"
+  }
+}
+
+const signInSwitchBtn2 = {
+  border: "1px solid #F1C36C",
+  borderRadius: "10px 0px 0px 10px",
+  Color: "#373737",
+  "&:hover":{
+    backgroundColor:"rgba(0, 128, 146, 0.1)"
+  }
+}
+
+const submitBtnStyle = {
+  background: "#008092",
+  padding:"10 40px",
+  borderRadius: "50px",
+  "&:hover":{
+    backgroundColor: "rgba(0, 128, 146, 0.9)"
+  }
+}
 
 const SignInWithPhoneNumber = () => {
   const errRef = useRef()
   const [errMsg, setErrMsg] = useState('')
+  const [open, setOpen] = useState(false)
+  const [showpwd, setShowpwd] = useState(false)
+
+  const handleClickShowPassword = () => {
+    setShowpwd(!showpwd)
+  };
+
 
   //Default formfields
   const defaultformfields = {
@@ -50,16 +110,13 @@ const SignInWithPhoneNumber = () => {
           resetFormfields();
           navigateToWelcomePage();
       }catch(err) {
-          if(!err?.response){
-              setErrMsg('No server Response')
-          }else if (err.response?.status === 500){
-              setErrMsg('Missing Username or password')
-          }else if (err.response?.status === 401) {
-              setErrMsg('Unauthorized')
-          } else {
-              setErrMsg('login Failed')
-          }
-          errRef.current.focus();
+        if(err?.data){
+          setOpen(true)
+          setErrMsg(err.data.error.Message)
+        }if(!err?.data){
+          setOpen(true)
+          setErrMsg(err.status)
+        }
       }
   }
 
@@ -74,88 +131,70 @@ const SignInWithPhoneNumber = () => {
   <Loading />
    :(
     <section className='bg-BG h-screen w-full flex justify-center items-center font-inter' >
-    <div className='bg-white h-[480px] w-[700px] rounded-lg shadow-md flex flex-col items-center'>
-    {errMsg? <p className='error'>{errMsg}</p>:null}
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-md w-full space-y-8">
-      <div>
-      {errMsg? <p className='error'>{errMsg}</p>:null}
-        <h2 className="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
-          Sign In
-        </h2>
-      </div>
+      <div className='bg-white h-[480px] w-[700px] rounded-lg shadow-md flex flex-col items-center'>
+        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-md w-full space-y-8">
+            <div>
+              <h2 className="mt-6 text-center text-3xl tracking-tight font-bold text-gray-900">
+                Sign In
+              </h2>
+            </div>
 
-      <div class="inline-flex rounded-md shadow-sm">
-          <button href="#" aria-current="page" class="py-2 px-4 text-sm font-medium text-gray-700 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 " onClick={navigateToSignInWithEmail}>    
-            Sign In with Email address
-          </button>
-
-          <button href="#" class="py-2 px-4 text-sm font-medium text-blue-700 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700" >
-            Sign In with Phone Number
-          </button>
-      </div>
-
-
-      <form className="mt-8 space-y-6 w-[462px]"  onSubmit={handleSubmit} >
-        <input type="hidden" name="remember" defaultValue="true" />
-
-        <div className="rounded-md shadow-sm space-y-6">
-          <div className='relative group'>
-            <input
-            type='Number'
-            value ={phone}
-            onChange={handleChange}
-            autoComplete='off'
-            name='email'
-            required 
-            className="appearance-none border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5 sm:text-sm"
-            />
-            <label 
-            className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Phone Number</label>
+          <div class="inline-flex rounded-md shadow-sm">
+            <Buttons variant="outlined" style={signInSwitchBtn2} text="Sign In with Email address" onClick={navigateToSignInWithEmail}/>
+            <Buttons variant="contained" style={signInSwitchBtn} text="Sign In with Phone Number"  />
           </div>
 
-          <div className='relative group'>
-            <input
-            type='password'
-            id='password'
-            value ={password}
-            name='password'
-            onChange={handleChange}
-            autoComplete='off'
-            required 
-            className="appearance-none border border-input-bd text-gray-900 text-sm rounded-xl peer block w-full p-2.5 sm:text-sm"
-            />
-            <label 
-            className='text-gray-500 transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-sm group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0'>Password</label>
-          </div>
-        </div>
+          <form className="mt-8 space-y-6 w-[462px] flex flex-col"  onSubmit={handleSubmit} >
+            <CssTextField 
+            label="Phone" 
+            id="custom-css-outlined-input" 
+            size='small'
+            onChange={handleChange} 
+            name="phone" 
+            value={phone}
+            required/>
 
-        <div className='flex justify-end'>
-        <span className='text-right text-gray-500 text-xs mr-0'>
-          Forgot password?
-        </span>
-        </div>
+            <CssTextField
+            required
+            label="Password"
+            id="password"
+            type={showpwd ? 'text' : 'password'}
+            onChange={handleChange} 
+            name="password" 
+            value={password}
+            size='small'
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showpwd ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }/>
 
-        <div>
-        <button  
-          type="submit"
-          className='w-[128px] py-2 text-white bg-register-btn rounded-full text-sm font-semibold mx-auto'
-          >Log In
-          </button>
+            <div className='flex justify-end'>
+              <span className='text-right text-gray-500 text-xs mr-0'>
+                Forgot password?
+              </span>
+            </div>
+
+            <div>
+              <Buttons variant="contained" style={submitBtnStyle} text="Log In" type="submit" />
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
-
-     </div>
-
-     <Outlet />
+    <Notifications open={open} setOpen={setOpen} text={errMsg} severity="error" />
   </section>
   )
 
-    return (
-   content
-)
+  return content
+
 }
 
 export default SignInWithPhoneNumber;
