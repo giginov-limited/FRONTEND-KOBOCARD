@@ -9,7 +9,7 @@ const KardDetails = ({value}) =>{
 
    const content = value.map((game) => {
     return(
-        <div key={game.id} className="py-6 px-16 flex justify-between rounded-xl shadow-xl">
+        <div key={game.id} className="py-6 px-16 flex justify-between rounded-xl shadow-lg">
             <img src={game.image} alt={game.title} className="w-[274] h-[202] rounded-md shadow-lg"/>
             <div className="text-center flex flex-col justify-around max-w-[230px]">
                 <span className="underline text-lg">Brief Description</span>

@@ -2,6 +2,17 @@ import Navigation from '../navigation/navigation'
 import CountdownTimer from '../../components/countDown/countdown-timer';
 import OngoingCardGames from '../../components/Game/ongoing/OngoingCard.component';
 import pic from '../../assets/home.jpg'
+import Buttons from '../../components/Button';
+
+const btnStyles = {
+  color:"#FFF",
+  background: "linear-gradient(141.35deg, #EAC95F 24.34%, #F1B151 77.78%)",
+  borderRadius: "10px",
+  "&:hover":{
+    background: "linear-gradient(141.35deg, #EAC95F 24.34%, #F1B151 77.78%)",
+    color:"#FFF",
+  }
+}
 
 const Home = () => {
   return(
@@ -25,14 +36,12 @@ const Home = () => {
         >
           <div className='flex flex-col justify-center items-start w-full h-full px-10 gap-3'>
 
-            <div class="p-4 max-w-[650px] bg-white bg-opacity-10 backdrop-blur-lg rounded drop-shadow-lg text-white text-5xl font-bold text-left"> 
+            <div className="p-4 max-w-[650px] bg-white bg-opacity-10 backdrop-blur-lg rounded drop-shadow-lg text-white text-5xl font-bold text-left"> 
               Take a Chance and Win BIg<br/>
               With <span className='text-home-text'>KoboCard</span>
             </div>
 
-            <button className="focus:outline-none text-white bg-gradient-to-r hover:bg-gradient-to-br from-btn-bg to-btn-bg2 font-medium rounded-lg text-lg px-5 py-3 mr-2 mb-2 ">
-              Buy KoboCard
-            </button>
+            <Buttons variant='contained' style={btnStyles} text="Buy KoboCard" size='large'/>
           </div>
         </div>
       </div>

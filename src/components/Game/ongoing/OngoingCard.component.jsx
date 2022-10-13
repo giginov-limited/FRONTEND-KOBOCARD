@@ -1,6 +1,28 @@
 import { useGetAllCardGamesQuery } from '../../../app/api/authApiSlice';
 import Loading from '../../Loading/Loading.Component';
 import { useNavigate } from 'react-router-dom';
+import Buttons from '../../Button';
+
+const moreInfoStyle =  {
+  background: "#828282",
+  borderRadius: "100px",
+  padding:"5px 30px",
+  "&:hover":{
+    backgroundColor:"rgba(130, 130, 130, 0.9)"
+  }
+}
+
+const playNowStyle =  {
+  border: "1px solid #05C718",
+  borderRadius: "100px",
+  padding:"5px 30px",
+  color:"#05C718",
+  "&:hover":{
+    backgroundColor:"rgba(5, 199, 24, 0.1)",
+    border: "1px solid #05C718",
+    color:"#05C718"
+  }
+}
 
 const OngoingCardGames = () =>{
   const {data,isLoading,isSuccess,isError,error} = useGetAllCardGamesQuery()
@@ -29,16 +51,9 @@ const OngoingCardGames = () =>{
           <div className='w-[80%] h-full flex flex-col justify-around items-start mx-auto '>
             <span className={``}>{game.title}</span>
             <span className='text-3xl font-semibold'>{game.price}</span>
-            <div className='flex justify-between w-full px-1'>
-            <button 
-              type="button" 
-              className="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br font-medium rounded-full text-sm px-5 py-2 text-center mr-2 mb-2"
-              onClick={() =>navigateToCardsHandler(game.id)}
-            >More Info</button>
-            <button  
-            className='font-medium rounded-full text-play-btn text-sm px-5 py-2 text-center mr-2 mb-2 border border-play-btn hover:bg-play-btn hover:border-white hover:text-white'
-            onClick={()=> navigateToPayHandler(game.id)} 
-            >Play now</button>
+            <div className='flex justify-between w-full'>
+            <Buttons variant="contained" style={moreInfoStyle} text="More Info" onClick={() =>navigateToCardsHandler(game.id)} size='small'/>
+            <Buttons variant="outlined" style={playNowStyle} text="Play Now" onClick={()=> navigateToPayHandler(game.id)} size='small'/>
           </div>
         </div>
       </div>
