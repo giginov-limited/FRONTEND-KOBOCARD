@@ -35,7 +35,7 @@ const Navigation =() => {
   return(
 
     <Fragment>
-      <div className= "w-full flex justify-between ">
+      <div className= "w-full flex justify-between max-h-[73px]">
         <Link className="self-center max-w-[11%] mx-auto" to ='/'>
           {/* <span className="self-center text-3xl text-black font-semibold font-inter italic px-1 ">KoboCard</span> */}
           <img src={theme} alt="" className='mx-2 h-[60px]'/>
