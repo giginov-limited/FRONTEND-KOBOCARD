@@ -85,7 +85,7 @@ const KardHistory  = () => {
             <div className="w-full h-full font-inter py-12">
             <span className="py-6 text-4xl font-bold  text-black">Kard Game History</span> 
             {
-                data.games > 0 ? <KardPagenationComponent {...data} />:
+                data.games.length > 0 ? <KardPagenationComponent {...data} />:
                 <div className="flex flex-col gap-6 justify-center items-center">
                 <img src={ticket} alt="ticket" className="h-[400px] w-[400px]"/>
                 <div classname="font-inter text-3xl">No games yet</div>
