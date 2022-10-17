@@ -16,11 +16,9 @@ const btnStyles = {
 
 const Home = () => {
   return(
-    <div className='homepage-1 overflow-hidden'>
+    <div className='homepage-1 overflow-hidden relative'>
       <Navigation /> 
-
-
-      <div className='flex justify-end items-center h-[270px] md:h-[440px] gap-1 '>
+      <div className=' flex justify-end items-center h-[270px] md:h-[440px] gap-1 '>
 
       <svg width="10" className='hidden md:block' height="237" viewBox="0 0 10 237" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line x1="5.96597" y1="4.03375" x2="4.03376" y2="232.034" stroke="#101A1C" strokeWidth="8" strokeLinecap="round"/>

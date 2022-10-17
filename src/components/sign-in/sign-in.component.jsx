@@ -134,7 +134,7 @@ const SignIn = () => {
   <Loading />
   :(
       <section className='bg-BG h-screen w-full flex justify-center items-center font-inter' >
-        <div className='bg-white h-[480px] w-[700px] rounded-lg shadow-md flex flex-col items-center'>
+        <div className='bg-white h-[480px] w-[90%] md:w-[700px] rounded-lg shadow-md flex flex-col items-center'>
           <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
               <div>
@@ -148,7 +148,7 @@ const SignIn = () => {
                 <Buttons variant="outlined" style={signInSwitchBtn2} text="Sign In with Phone Number" onClick={navigateToSignInWithPhoneNumber} />
               </div>
 
-              <form className="mt-8 space-y-6 w-[462px] flex flex-col"  onSubmit={handleSubmit} >
+              <form className="mt-8 space-y-6 w-full md:w-[462px] flex flex-col"  onSubmit={handleSubmit} >
                 <CssTextField 
                   label="Email" 
                   id="custom-css-outlined-input"
@@ -158,6 +158,7 @@ const SignIn = () => {
                   name="email" 
                   value={email}
                   required
+                  fullWidth
                 />
 
                 <CssTextField

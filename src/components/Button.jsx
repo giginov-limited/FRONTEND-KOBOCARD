@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 
 const  Btns = styled(Button)(({ theme }) => ({
     [theme.breakpoints.down('md')]: {
-      padding: theme.spacing(0.5)
+      padding: theme.spacing(0.7)
     },
   }));
 
