@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux/es/exports';
 import theme from '../../assets/THEMES scvg.png'
 import AccountMenu from '../../components/Menu';
 import Buttons from '../../components/Button';
+import SwipeableTemporaryDrawer from '../../components/Drawer';
 
 const loginBtnStyle = {
   border: "1px solid #EAC95F",
@@ -35,14 +36,14 @@ const Navigation =() => {
   return(
 
     <Fragment>
-      <div className= "w-full flex justify-between max-h-[73px]">
-        <Link className="self-center max-w-[11%] mx-auto" to ='/'>
+      <div className= "w-full grid grid-cols-2 md:flex md:justify-between my-3 md:my-0 max-h-[65px]">
+        <Link className="flex justify-start w-full md:self-center md:max-w-[11%] mx-auto" to ='/'>
           {/* <span className="self-center text-3xl text-black font-semibold font-inter italic px-1 ">KoboCard</span> */}
-          <img src={theme} alt="" className='mx-2 h-[60px]'/>
+          <img src={theme} alt="" className='mx-2 h-[30px] md:h-[60px] '/>
         </Link>
       
-      <div className='bg-nav-bg w-[88%] flex justify-around items-center py-2 rounded-tl-full'>
-        <div className='flex gap-8 justify-around text-white text-lg'>
+      <div className='hidden bg-nav-bg w-[88%] md:flex md:justify-around md:items-center py-2 rounded-tl-full'>
+        <div className='hidded md:flex gap-8 justify-around text-white text-lg '>
           <h3>Live Games</h3>
           <h3>Help</h3>
           <h3>Contacts</h3>
@@ -64,6 +65,9 @@ const Navigation =() => {
             </div>)
         }
       </div>
+    </div>
+    <div className='block justify-self-end md:hidden'>
+    <SwipeableTemporaryDrawer />
     </div>
   </div>
       <Outlet />
