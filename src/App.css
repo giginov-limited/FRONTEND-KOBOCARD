@@ -3,11 +3,12 @@
   padding: 0;
   text-align: center;
   display: grid;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   /* flex-direction: column; */
 }
 
 .wrapper{
   min-height: 100vh;
-}
+  overflow: hidden;
+} 
 

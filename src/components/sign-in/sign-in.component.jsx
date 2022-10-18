@@ -170,7 +170,7 @@ const SignIn = () => {
                   name="password" 
                   value={password}
                   size='small'
-                  endAdornment={
+                  endadornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
