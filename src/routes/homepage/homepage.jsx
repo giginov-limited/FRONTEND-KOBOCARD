@@ -16,10 +16,8 @@ const btnStyles = {
 
 const Home = () => {
   return(
-    <div className='homepage-1 overflow-hidden'>
+    <div className='homepage-1 overflow-hidden relative'>
       <Navigation /> 
-
-
       <div className='flex justify-end items-center h-[270px] md:h-[440px] gap-1 '>
 
       <svg width="10" className='hidden md:block' height="237" viewBox="0 0 10 237" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +32,7 @@ const Home = () => {
           <img src={pic} alt='' className='w-full  filter brightness-75 absolute bg-no-repeat bg-cover h-full object-fit md:object-cover rounded-b-2xl'/>
           <div className='absolute flex flex-col justify-start items-start w-full h-full px-10 py-14 tracking-wide md:py-10 gap-6 md:gap-6'>
 
-            <div className="p-4 max-w-[650px] bg-white bg-opacity-20  rounded drop-shadow-lg text-white text-lg md:text-5xl font-bold text-left font-inter"> 
+            <div className="p-4 max-w-[1/3] bg-white bg-opacity-20  rounded drop-shadow-lg text-white text-lg md:text-5xl font-bold text-left font-inter"> 
               Take a Chance and Win BIG<br/>
               With <span className='text-home-text'>KoboCard</span>
             </div>

@@ -12,23 +12,24 @@ const KardDetails = ({value}) =>{
     // value.map((v)=>console.log(v))
    const content = value.map((game,index) => {
     return(
-        <div key={index} className="py-6 px-16 flex justify-between rounded-xl shadow-lg">
+        <div key={index} className="md:py-6 py-2 md:px-16 flex justify-between rounded-xl shadow-lg">
             <img src={game.image} alt={game.title} className="w-[274] h-[202] rounded-md shadow-lg"/>
-            <div className="text-center flex flex-col justify-around max-w-[230px]">
+            <div className="hidden text-center md:flex flex-col justify-around max-w-[230px]">
                 <span className="underline text-lg">Brief Description</span>
                 <span className="text-gray-400 ">{game.description.slice(0,60) + "..."}</span>
                 <span className="text-kard-history-price text-2xl" >{game.price}</span>
             </div>
+
             <div className="flex flex-col justify-around items-center max-w-[287px] gap-2">
-                    <div className="font-semibold">12-02-2022</div>
+                    <div className="text-xmm md:text-base font-semibold">12-02-2022</div>
                     <div className="flex flex-col gap-1 border border-black">
-                        <span className="text-sm font-semibold p-1">Ticket</span>
+                        <span className="text-xmm md:text-sm font-semibold p-1">Ticket</span>
                         <hr />
-                        <span className="text-xs p-2">{game.id}</span>
+                        <span className="text-xsm md:text-xs p-1 md:p-2">{game.id}</span>
                     </div>
                     <div className="flex border border-black">
-                        <span className="border-r border-black text-xs p-1">status</span>
-                        <span className="text-xs p-1 text-green-700">{game.status}</span>
+                        <span className="border-r border-black text-xsm md:text-xs p-1">status</span>
+                        <span className="text-xsm md:text-xs p-1 text-green-700">{game.status}</span>
                     </div>
                     <button className="bg-More-info-btn text-xs p-1 w-[120px] text-white rounded-full">
                         More info
@@ -63,9 +64,9 @@ const KardPagenationComponent = ({games}) => {
 
     let pageContent = 
     <>
-    <KardDetails value={_DATA.currentData()}/>
+    <KardDetails value={_DATA.currentData()} />
     <div className="flex justify-center py-6">
-    <Pagination count={count} size="large" page={page} color='primary' onChange={handleChange}/>
+    <Pagination count={count} size='medium' page={page} color='primary' onChange={handleChange}/>
     </div>
     </>;
 
@@ -83,7 +84,7 @@ const KardHistory  = () => {
         <Loading />
         </>):isSuccess?(
             <div className="w-full h-full font-inter py-12">
-            <span className="py-6 text-4xl font-bold  text-black">Kard Game History</span> 
+            <span className="py-6 text-lg md:text-4xl font-bold  text-black">Kard Game History</span> 
             {
                 data.games.length > 0 ? <KardPagenationComponent {...data} />:
                 <div className="flex flex-col gap-6 justify-center items-center">

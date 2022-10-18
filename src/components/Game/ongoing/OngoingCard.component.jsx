@@ -48,12 +48,12 @@ const OngoingCardGames = () =>{
     data.games.map((game)=>{
 
       return(
-      <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 h-[140px] md:h-[200px] rounded-2xl w-full shadow-lg"  key= {game.id}>
-        <div className='bg-white rounded-2xl h-[120px] md:h-[180px] w-full  text-black  p-2 '>
+      <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 h-[140px] md:h-[200px] rounded-2xl w-full xl:max-w-[500px] shadow-lg"  key= {game.id}>
+        <div className='bg-white rounded-2xl h-[120px] md:h-[180px] w-full xl:max-w-[500px]  text-black  p-2 '>
           <div className='w-[95%] md:w-[80%] h-full flex flex-col justify-around items-start mx-auto '>
-            <span className='text-xs font-bold'>{game.title}</span>
-            <span className='text-lg md:text-3xl font-semibold'>&#8358; {Number(game.price).toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
-            <div className='flex justify-between w-full'>
+            <span className='text-xmm md:text-xs font-bold'>{game.title}</span>
+            <span className='text-base md:text-3xl font-semibold'>&#8358; {Number(game.price).toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+            <div className='flex justify-between w-full gap-4 md:gap-0'>
             <Buttons variant="contained" style={moreInfoStyle} text="More Info" onClick={() =>navigateToCardsHandler(game.id)} size='small'/>
             <Buttons variant="outlined" style={playNowStyle} text="Play Now" onClick={()=> navigateToPayHandler(game.id)} size='small'/>
           </div>

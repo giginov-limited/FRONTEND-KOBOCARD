@@ -60,9 +60,9 @@ const Details = ({value, refetch}) =>{
     isLoading?
     <Loading />:
     isSuccess?
-    <div className="w-[60%] md:w-10/12 mx-auto">
+    <div className="w-[90%] md:w-10/12 mx-auto">
 
-        <div className="flex justify-start gap-12 h-[590px]">
+        <div className="flex flex-col md:flex-row justify-start gap-12 h-[590px]">
         <img
         className="w-[590px] h-[590px] shadow-2xl rounded-sm"
         src="https://images.unsplash.com/photo-1584936684506-c3a7086e8212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80"  alt="pic" />

@@ -111,15 +111,15 @@ const SignUp = () => {
 
   return(
     <div className='bg-BG py-8 min-h-screen font-inter'>
-      <div className='w-[600px]  bg-white flex flex-col items-center rounded-lg shadow mx-auto'>
-        <Link to='/sign-in' className='text-sm hover:underline'>Already have an Account?
+      <div className='w-[90%] md:w-[600px]  bg-white flex flex-col items-center rounded-lg shadow mx-auto'>
+        <Link to='/sign-in' className='text-xs md:text-sm hover:underline'>Already have an Account?
           Sign in 
         </Link>
 
-        <h2 className='text-4xl my-2 font-semibold'>Create Account</h2>
-        <p className='text-sm my-3 opacity-30'>Enter the following credentials to create your account</p>
+        <h2 className='text-lg md:text-4xl my-2 font-semibold'>Create Account</h2>
+        <p className='text-sm opacity-30'>Enter the following credentials to create your account</p>
 
-        <form className='w-[450px] flex flex-col my-3 gap-6' onSubmit={handleSubmit}>
+        <form className='w-full md:w-[450px] flex flex-col my-3 gap-6 px-2' onSubmit={handleSubmit}>
 
           <CssTextField 
           label="First Name" 

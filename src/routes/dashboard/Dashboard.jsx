@@ -13,72 +13,74 @@ const Dashboard = () => {
   let content = (isLoading)?
   <Loading />:
   (isSuccess)?(
-    <div className='py-4 flex justify-start'>
-      <h2 className='text-4xl font-bold uppercase'>Welcome {data.user.first_name}</h2>
+    <div className='py-2 md:py-4 flex justify-start'>
+      <h2 className='text-lg md:text-4xl font-bold uppercase'>Welcome {data.user.first_name}</h2>
     </div>
   ):refetch();
 
   return (
-    <div className='font-inter py-12 w-9/12 mx-auto'>
+    <div className='font-inter py-12 w-11/12 md:w-9/12 mx-auto'>
     {content}
-    <p className='italic text-lg font-extralight text-left'>Good Morning, Remember play a quick game</p>
+    <p className='italic text-sm md:text-lg font-extralight text-left '>Good Morning, Remember play a quick game</p>
 
     <div
-      style={{
-        backgroundImage:`url(${bet})`,
-       }}
-      className='w-full h-[450px] bg-cover bg-no-repeat object-cover rounded-t-2xl flex flex-col  justify-start items-start p-12 relative'
+      className='w-full  h-[200px] md:h-[450px] relative'
     >
 
-      <div className='text-white flex flex-col justify-evenly h-full'>
+    <img src={bet} className='absolute filter brightness-50 w-full h-[200px] md:h-full object-cover rounded-t-3xl' alt='' />
+    <div className='absolute flex justify-between items-center md:items-start px-3 h-full max-w-full'>
+      <div className='text-white flex flex-col justify-evenly gap-3 md:gap-12 self-center md:-mt-12 md:w-[600px]'>
 
         <div className='flex flex-col justify-start items-start gap-3'>
-        <span className='text-3xl font-bold tracking-wide'>More Cards, More Wins</span>
-        <span className='text-lg'>The more Kobocards you play, the higher your chances to win big</span>
+        <span className='text-base md:text-3xl font-bold tracking-wide'>More Cards, More Wins</span>
+        <span className='text-xxs md:text-base text-left'>The more Kobocards you play, the higher your chances to win big</span>
         </div>
 
-        <div className='flex justify-start gap-2'>
+        <div className='flex justify-start gap-2 '>
           <div className='flex items-center gap-1 justify-start'>
-            <div className=' bg-Choose-btn p-2 rounded-full h-[55px] w-[55px]'>
-            <span className='text-white font-bold text-4xl'>C</span>
+            <div className=' bg-Choose-btn px-1 md:p-0  rounded-full  md:h-[55px] md:w-[55px]'>
+            <span className='text-white font-bold text-base md:text-4xl'>C</span>
             </div>
-            <span className='text-left'>Choose<br/> your Games</span>
+            <span className='text-left text-xxs md:text-base'>Choose<br/>your Games</span>
           </div>
           <div className='flex items-center gap-1 justify-start'>
-            <div className=' bg-Buy-btn p-2 rounded-full h-[55px] w-[55px]'>
-            <span className='text-white font-bold text-4xl'>B</span>
+            <div className=' bg-Buy-btn px-1 md:p-0 rounded-full  md:h-[55px] md:w-[55px]'>
+            <span className='text-white font-bold text-base md:text-4xl'>B</span>
             </div>
-            <span className='text-left'>Buy <br/> Your KoboCard</span>
+            <span className='text-left text-xxs md:text-base'>Buy <br/>Your KoboCard</span>
           </div>
           <div className='flex items-center gap-1 justify-start'>
-            <div className=' bg-Win-btn p-2 rounded-full h-[55px] w-[55px]'>
-            <span className='text-white font-bold text-4xl'>W</span>
+            <div className=' bg-Win-btn px-1 md:p-0 rounded-full  md:h-[55px] md:w-[55px]'>
+            <span className='text-white font-bold text-base md:text-4xl'>W</span>
             </div>
-            <span className='text-left'>Win<br/>KoboCard Games</span>
+            <span className='text-left text-xxs md:text-base'>Win<br/>KoboCard Games</span>
           </div>
         </div>
       </div>
-      <img className='absolute top-0 right-0 -mr-24' src={bett} alt="" />
+
+
+      <img className='-mr-12 -mt-8  md:-mr-32 md:-mt-24 w-[184px] h-[152px] md:w-[85%] md:h-[85%]' src={bett} alt="" />
+      </div>
     </div>
     <div className='text-black grid grid-cols-3 '>
-      <div className='py-2 flex flex-col gap-3 justify-around items-center border border-black' >
-        <span className='text-xl font-semibold'>GETTING STARTED</span>
-        <span className='text-lg'>A brief guide on how to use Kobocards</span>
-        <button className='text-white bg-btn-bg3 w-[137px] p-1 rounded-2xl'>More Info</button>
+      <div className='py-2 flex flex-col gap-1 md:gap-3 justify-around items-center border border-black' >
+        <span className='text-xsm md:text-xl font-semibold'>GETTING STARTED</span>
+        <span className='text-xxs md:text-lg'>A brief guide on how to use Kobocards</span>
+        <button className='text-white bg-btn-bg3 w-[51px] md:w-[137px] p-1 rounded-2xl text-xxs md:text-base'>More Info</button>
       </div>
-      <div className='py-2 flex flex-col gap-3  justify-around items-center border border-black' >
-        <span className='text-xl font-semibold'>HOW TO FUND YOUR WALLET</span>
-        <span className='text-lg'>A brief guide on how to use Kobocards</span>
-        <button className='text-white bg-btn-bg3 w-[137px] p-1 rounded-2xl'>More Info</button>
+      <div className='py-2 flex flex-col gap-1 md:gap-3  justify-around items-center border border-black' >
+        <span className='text-xsm md:text-xl font-semibold'>HOW TO FUND YOUR WALLET</span>
+        <span className='text-xxs md:text-lg'>A brief guide on how to use Kobocards</span>
+        <button className='text-white bg-btn-bg3 w-[51px] md:w-[137px] p-1 rounded-2xl text-xxs md:text-base'>More Info</button>
       </div>
-      <div className='py-2 flex flex-col gap-3 justify-around items-center border border-black' >
-        <span className='text-xl font-semibold'>FAQs</span>
-        <span className='text-lg'>A brief guide on how to use Kobocards</span>
-        <button className='text-white bg-btn-bg3 w-[137px] p-1 rounded-2xl'>More Info</button>
+      <div className='py-2 flex flex-col gap-1 md:gap-3 justify-around items-center border border-black' >
+        <span className='text-xsm md:text-xl font-semibold'>FAQs</span>
+        <span className='text-xxs md:text-lg'>A brief guide on how to use Kobocards</span>
+        <button className='text-white bg-btn-bg3 w-[51px] md:w-[137px] p-1 rounded-2xl text-xxs md:text-base'>More Info</button>
       </div>
     </div>
-    <div className='mt-12'>
-      <span className='text-3xl'>All Card Games</span>
+    <div className='mt-6 md:mt-12'>
+      <span className='text-xl md:text-3xl'>All Card Games</span>
       <AllCardGames />
     </div>
     </div>

@@ -2,21 +2,14 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import nav from '../assets/home.jpg'
 import Buttons from './Button';
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import { logOut } from '../features/authSlice';
 const menuStyle={
-  color:"black",
+  color:"#FFF",
 }
 const btnStyles={
   color:"#FFF",
@@ -35,13 +28,13 @@ const loginBtnStyle = {
 
 const SignUpBtnStyle = {
   background: "#DAB641",
-  // width: "100px",
+  width: "100px",
   height: "33px",
   color:"white",
   borderRadius:"40px",
 }
 
-export default function SwipeableTemporaryDrawer() {
+export default function SwipeableTemporaryDrawer({user}) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -61,16 +54,21 @@ export default function SwipeableTemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const handleClick = (anchor) =>{
-    toggleDrawer(anchor, false)
-  }
-
   const navigate = useNavigate();
   const navigateToSignInPage = ()=>{
     navigate('/sign-in')
   }
   const navigateToSignUpPage = ()=>{
     navigate('/sign-up')
+  }
+  
+  const navigateToWalletPage = () => navigate('/wallet')
+  const navigateToAccountPage = () => navigate('/account')
+  const navigateToKardHistory = () => navigate('/game-history')
+  const navigateToDashboard = () => navigate('/dashboard')
+  const dispatch = useDispatch();
+  const logOuthandler = () => {
+    dispatch(logOut())
   }
 
   const list = (anchor) => (
@@ -81,20 +79,37 @@ export default function SwipeableTemporaryDrawer() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-    <div className='flex flex-col justify-between items-center py-12 w-full h-screen'>
+    {
+      user?
+      <div className='flex flex-col justify-between items-center py-12 w-full h-screen'>
 
-    <div className='flex flex-col gap-6 '>
-    <Buttons variant='text' style={btnStyles} text="Live Games" />
-    <Buttons variant='text' style={btnStyles} text='Help'/>
-    <Buttons variant='text' style={btnStyles} text='Contact Us'/>
-    </div>
+      <div className='flex flex-col gap-6 '>
+      <Buttons variant='text' style={btnStyles} text="Account" onClick={navigateToAccountPage}/>
+      <Buttons variant='text' style={btnStyles} text='Dashboard' onClick={navigateToDashboard}/>
+      <Buttons variant='text' style={btnStyles} text='Draw History' onClick={navigateToKardHistory}/>
+      </div>
+  
+      <div className='flex flex-col justify-center items-center gap-6'>
+      <Buttons variant='outlined' style={loginBtnStyle} text='Waller' onClick={navigateToWalletPage}/>
+      <Buttons variant='outlined' style={SignUpBtnStyle} text='Log Out' onClick={logOuthandler}/>
+      </div>
+  
+      </div>:
+      <div className='flex flex-col justify-between items-center py-12 w-full h-screen'>
 
-    <div className='flex flex-col justify-center items-center gap-6'>
-    <Buttons variant='outlined' style={loginBtnStyle} text='Login' onClick={navigateToSignInPage}/>
-    <Buttons variant='outlined' style={SignUpBtnStyle} text='Create Account' size='large' onClick={navigateToSignUpPage}/>
-    </div>
-
-    </div>
+      <div className='flex flex-col gap-6 '>
+      <Buttons variant='text' style={btnStyles} text="Live Games" />
+      <Buttons variant='text' style={btnStyles} text='Help'/>
+      <Buttons variant='text' style={btnStyles} text='Contact Us'/>
+      </div>
+  
+      <div className='flex flex-col justify-center items-center gap-6'>
+      <Buttons variant='outlined' style={loginBtnStyle} text='Login' onClick={navigateToSignInPage}/>
+      <Buttons variant='outlined' style={SignUpBtnStyle} text='Create Account' onClick={navigateToSignUpPage}/>
+      </div>
+  
+      </div>
+    }
     </Box>
     </div>
   );
