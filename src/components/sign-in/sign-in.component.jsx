@@ -108,6 +108,7 @@ const SignIn = () => {
 
       try{
           const userData = await login(formFields).unwrap()
+          console.log(userData)
           dispatch(setCredits({ ...userData }))
           resetFormfields();
           navigateToWelcomePage();
