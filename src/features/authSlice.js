@@ -18,10 +18,9 @@ const authSlice = createSlice({
             state.user = {...user}
             state.token = token.access_token
             state.refreshToken = token.refresh_token
-
-            localStorage.setItem('user', JSON.stringify(state.user));
-            localStorage.setItem('token', JSON.stringify(state.token));
-            localStorage.setItem('refreshToken', JSON.stringify(state.refreshToken));
+            sessionStorage.setItem('user', JSON.stringify(state.user));
+            sessionStorage.setItem('token', JSON.stringify(state.token));
+            sessionStorage.setItem('refreshToken', JSON.stringify(state.refreshToken));
 
         },
         setRefreshToken:(state,action) => {
@@ -30,8 +29,8 @@ const authSlice = createSlice({
             state.token = tokens.access_token
             state.refreshToken = tokens.refresh_token
 
-            localStorage.setItem('token', JSON.stringify(state.token));
-            localStorage.setItem('refreshToken', JSON.stringify(state.refreshToken));
+            sessionStorage.setItem('token', JSON.stringify(state.token));
+            sessionStorage.setItem('refreshToken', JSON.stringify(state.refreshToken));
         },
         setTimeOutMsg:(state,action) =>{
             state.session = action.payload
@@ -40,8 +39,8 @@ const authSlice = createSlice({
             state.user = null
             state.token = null
 
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
+            sessionStorage.removeItem('user');
+            sessionStorage.removeItem('token');
         }
     },
 })

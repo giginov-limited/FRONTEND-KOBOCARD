@@ -30,21 +30,17 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         body:{'refresh_token':refreshtoken},
         }, api, extraOptions)
 
-        console.log(refreshResult.data)
-
     if (refreshResult.data) {
       // store the new token
       api.dispatch(setRefreshToken({ ...refreshResult.data}))
       // retry the initial query
       result = await baseQuery(args, api, extraOptions)
     } else {
-      api.dispatch(setTimeOutMsg("Session Time Out"))
       api.dispatch(logOut())
       api.dispatch(setTimeOutMsg(null))
     }
   }
   return result
-
 }
 
 export const signInApi = createApi({

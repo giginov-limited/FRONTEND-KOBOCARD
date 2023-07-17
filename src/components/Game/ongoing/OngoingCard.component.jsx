@@ -61,9 +61,9 @@ const OngoingCardGames = () =>{
       </div>
     </div>
       )
-    }): <h3>No Games </h3>)
+    }): <h3 className='flex justify-center items-center'>No Games </h3>)
 
- : <h3>{error}</h3>
+ : <h3 className='flex justify-center items-center'>An error occured while fetching card game</h3>
 
  
 

@@ -43,7 +43,7 @@ const Home = () => {
       </div>
     <OngoingCardGames />
     
-    <CountdownTimer CountdownTimestampMs={1672576160000}/>
+    <CountdownTimer CountdownTimestampMs={1678596160000}/>
     </div>
   )
 }
