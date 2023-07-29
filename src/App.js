@@ -15,6 +15,7 @@ import UserWallet from './routes/wallet/wallet';
 import UserPay from './routes/Pay/userPay';
 import KardHistory from './components/Game/History/KardHistory';
 import NotFound from './routes/404/404.component';
+import ForgotPassword from './routes/forgotPassword/forgotPassword';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
            <Route path='sign-in' element ={<SignIn />} />
            <Route path='SignInWithPhoneNumber' element ={<SignInWithPhoneNumber />} />
            <Route path='card/:cardId' element ={<CardDescription/>} />
+           <Route path='verifyUser/:id' element = {<ForgotPassword />} />
            <Route path='*' element={<NotFound />} />
 
 
