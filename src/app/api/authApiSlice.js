@@ -94,6 +94,13 @@ export const authApiSlice = signInApi.injectEndpoints({
             }),
             invalidatesTags:['User-Details']
         }),
+        resetPassword: builder.mutation({
+            query: (id) => ({
+                url: `/users/reset`,
+                method: 'POST',
+            }),
+            invalidatesTags:['User-Details']
+        }),
     })
 })
 
@@ -110,4 +117,5 @@ export const {
     usePayCardGamesByIdMutation,
     useGetUserGamesQuery,
     useFundWalltetMutation,
+    useResetPasswordMutation,
 } = authApiSlice
