@@ -1,7 +1,6 @@
 import { useGetAllCardGamesQuery } from '../../../app/api/authApiSlice';
 import Loading from '../../Loading/Loading.Component';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material';
 import Buttons from '../../Button';
 import noGamesIcon from '../../../assets/NoGamesIcon.png'
 
@@ -27,7 +26,7 @@ const playNowStyle =  {
 }
 
 const OngoingCardGames = () =>{
-  const {data,isLoading,isSuccess,isError,error} = useGetAllCardGamesQuery()
+  const {data,isLoading,isSuccess} = useGetAllCardGamesQuery()
   
   
   const navigate = useNavigate()
@@ -39,32 +38,32 @@ const OngoingCardGames = () =>{
       navigate(`/Pay/:${id}`)
   }
 
-  const colors = ["red","blue","green"]
-  // number.toLocaleString(); // "1,234,567,890"
+  // const colors = ["red","blue","green"]
+  // // number.toLocaleString(); // "1,234,567,890"
 
 
   let content = 
   isLoading?<Loading /> :
   isSuccess?( data.games?
-    data.games.map((game)=>{
+    <div className='grid grid-cols-2 md:grid-cols-3 items-center gap-4 md:gap-36 md:space-y-4 justify-items-center px-1 py-4 md:p-5'>{
+      data.games.map((game)=>{
 
-      return(
-        <div className='grid grid-cols-2 md:grid-cols-3 items-center gap-4 md:gap-36 md:space-y-4 justify-items-center px-1 py-4 md:p-5'>
-        <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 h-[140px] md:h-[200px] rounded-2xl w-full xl:max-w-[500px] shadow-lg"  key= {game.id}>
-          <div className='bg-white rounded-2xl h-[120px] md:h-[180px] w-full xl:max-w-[500px]  text-black  p-2 '>
-            <div className='w-[95%] md:w-[80%] h-full flex flex-col justify-around items-start mx-auto '>
-              <span className='text-xmm md:text-xs font-bold'>{game.title}</span>
-              <span className='text-base md:text-3xl font-semibold'>&#8358; {Number(game.price).toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
-              <div className='flex justify-between w-full gap-4 md:gap-0'>
-              <Buttons variant="contained" style={moreInfoStyle} text="More Info" onClick={() =>navigateToCardsHandler(game.id)} size='small'/>
-              <Buttons variant="outlined" style={playNowStyle} text="Play Now" onClick={()=> navigateToPayHandler(game.id)} size='small'/>
+        return(
+          <div className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 h-[140px] md:h-[200px] rounded-2xl w-full xl:max-w-[500px] shadow-lg"  key= {game.id}>
+            <div className='bg-white rounded-2xl h-[120px] md:h-[180px] w-full xl:max-w-[500px]  text-black  p-2 '>
+              <div className='w-[95%] md:w-[80%] h-full flex flex-col justify-around items-start mx-auto '>
+                <span className='text-xmm md:text-xs font-bold'>{game.title}</span>
+                <span className='text-base md:text-3xl font-semibold'>&#8358; {Number(game.price).toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+                <div className='flex justify-between w-full gap-4 md:gap-0'>
+                <Buttons variant="contained" style={moreInfoStyle} text="More Info" onClick={() =>navigateToCardsHandler(game.id)} size='small'/>
+                <Buttons variant="outlined" style={playNowStyle} text="Play Now" onClick={()=> navigateToPayHandler(game.id)} size='small'/>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-        </div>
-      )
-    }):  
+        )
+      })
+    }</div>:  
     <div className='flex justify-center items-center '>
     <img src={noGamesIcon} alt='noGamesIcon' className='object-cover max-w-[470] h-full max-h-[359px] '/>
     <div className='self-center text-left font-inter font-semibold text-4xl text-white'>
@@ -95,3 +94,4 @@ const OngoingCardGames = () =>{
 
 export default OngoingCardGames;
 
+//        <div className='grid grid-cols-2 md:grid-cols-3 items-center gap-4 md:gap-36 md:space-y-4 justify-items-center px-1 py-4 md:p-5'>

@@ -13,7 +13,7 @@ const authSlice = createSlice({
     reducers: {
         setCredits: (state, action) => {
             const {token, user} = action.payload
-            console.log(token)
+            console.log(action.payload)
 
             state.user = {...user}
             state.token = token.access_token

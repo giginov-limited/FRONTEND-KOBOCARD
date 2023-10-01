@@ -1,5 +1,4 @@
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const  Btns = styled(Button)(({ theme }) => ({
@@ -8,10 +7,10 @@ const  Btns = styled(Button)(({ theme }) => ({
     },
   }));
 
-export default function Buttons({variant,style,text,onClick,type,disable,size}){
+export default function Buttons({variant,style,text,onClick,type,disable,size, ...rest}){
     disable = disable ? disable : false;
 
     return (
-        <Btns variant={variant} sx={style} onClick={onClick} type={type} disabled={disable} size={size}><span className='capitalize font-inter tracking-wider text-xsm md:text-xmm lg:text-base'>{text}</span></Btns>
+        <Btns variant={variant} sx={style} onClick={onClick} type={type} disabled={disable} size={size} {...rest} ><span className='capitalize font-inter tracking-wider text-xsm md:text-xmm lg:text-sm'>{text}</span></Btns>
     )
 }

@@ -9,16 +9,14 @@ function AccountPage() {
     data,
     isLoading,
     isSuccess,
-    isError,
-    error,
     refetch,
   } = useGetUserDetailsQuery(1)
 
 
-  let dashBoardContent= isLoading?(<>
+let dashBoardContent= isLoading?(<>
 <Loading />
-  </>):isSuccess?(<Info value={[data,refetch]}/>):
-  console.log(isError)
+  </>):isSuccess?(<Info value={[data,refetch]}/>): 
+  (<div>error fetching data ...</div>)
 
   return dashBoardContent
 }

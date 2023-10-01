@@ -1,5 +1,5 @@
 import {Outlet, useNavigate} from 'react-router-dom';
-import {useState,useEffect} from 'react';
+import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useSignUpMutation } from '../../app/api/authApiSlice';
 import { styled } from '@mui/material/styles';
@@ -47,7 +47,7 @@ const SubmitBtn = {
 
 const SignUp = () => {
 
-  const [signUp, {isSuccess,isError,error}] = useSignUpMutation()
+  const [signUp] = useSignUpMutation()
   const [open, setOpen] = useState(false)
   const defaultformfields = {
   'first_name':'',
@@ -79,34 +79,40 @@ const SignUp = () => {
     navigate('/sign-in')
   }
 
-  const valid = password == confirm_Password
+  const valid = password === confirm_Password
   
 
   const form = {first_name,last_name,phone,email,password};
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    //Verify Phone status...
+      form.phone = form.phone.replace(/\D/g, '');
+      if (form.phone.startsWith('0')) {
+        form.phone = '234' + form.phone.substring(1);
+      } else if (!form.phone.startsWith('234')) {
+        form.phone = '234' + form.phone;
+      }
+    
     try {
-      const res = await signUp(form)
+      const res = await signUp(form).unwrap()
+      console.log(res)
       resetFormfields()
       navigateToSignIn();
-    } catch (err) {
-      if(err?.data){
+    } catch ({data}) {
         setOpen(true)
-        setErrMsg(err.data.error.Message)
-      }if(err.status){
-        setOpen(true)
-        setErrMsg(err.status)
-      }
+        setErrMsg(data.error.Detail ? data.error.Detail : data.error.Message)
     }
 }
 
 
 
   const handleChange = (event) => {
-   const {name, value} = event.target;
+   let {name, value} = event.target;
 
     setFormFields({...formFields,[name]: value});
+    
   };
 
   return(
@@ -123,7 +129,7 @@ const SignUp = () => {
 
           <CssTextField 
           label="First Name" 
-          id="custom-css-outlined-input" 
+          id="custom-css-outlined-input-1" 
           size='small'
           onChange={handleChange} 
           name="first_name" 
@@ -141,7 +147,7 @@ const SignUp = () => {
 
           <CssTextField 
           label="Phone" 
-          id="custom-css-outlined-input" 
+          id="custom-css-outlined-input-2" 
           size='small'
           onChange={handleChange} 
           name="phone" 
@@ -150,7 +156,7 @@ const SignUp = () => {
 
           <CssTextField 
           label="Email" 
-          id="custom-css-outlined-input"
+          id="custom-css-outlined-input-3"
           type='email' 
           size='small'
           onChange={handleChange} 
@@ -169,7 +175,7 @@ const SignUp = () => {
           name="password" 
           value={password}
           size='small'
-          endAdornment={
+          endadornment={
             <InputAdornment position="end">
               <IconButton
                 aria-label="toggle password visibility"
@@ -193,7 +199,7 @@ const SignUp = () => {
         name="confirm_Password" 
         value={confirm_Password}
         size='small'
-        endAdornment={
+        endadornment={
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"

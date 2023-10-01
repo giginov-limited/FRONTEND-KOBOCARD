@@ -1,5 +1,5 @@
 import {useNavigate} from 'react-router-dom';
-import {useRef, useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux'
 import { setCredits } from '../../features/authSlice';
 import { useLoginMutation} from '../../app/api/authApiSlice';
@@ -60,7 +60,6 @@ const submitBtnStyle = {
 }
 
 const SignIn = () => {
-  const errRef = useRef()
   const [errMsg, setErrMsg] = useState('')
   const [open, setOpen] = useState(false)
   const [showpwd, setShowpwd] = useState(false)
@@ -108,19 +107,13 @@ const SignIn = () => {
 
       try{
           const userData = await login(formFields).unwrap()
-          console.log(userData)
           dispatch(setCredits({ ...userData }))
           resetFormfields();
           navigateToWelcomePage();
-      }catch(err) {
-        if(err?.data){
-          setOpen(true)
-          setErrMsg(err.data.error.Message)
-        }if(err.status){
-          setOpen(true)
-          setErrMsg(err.status)
-        }
-      }
+      } catch ({data}) {
+        setOpen(true)
+        setErrMsg(data.error.Detail ? data.error.Detail : data.error.Message)
+    }
   }
 
 

@@ -5,8 +5,6 @@ import UpdateBtn from "../../components/Display-Picture/Update-Picture";
 import DisplayPicture from "../../components/Display-Picture/display-Picture";
 import Buttons from "../../components/Button";
 import Notifications from "../../components/Notification";
-import { useDispatch } from "react-redux";
-import { setTimeOutMsg } from "../../features/authSlice";
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -14,6 +12,7 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import ContactPhoneRoundedIcon from '@mui/icons-material/ContactPhoneRounded';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuItem from '@mui/material/MenuItem';
+import VerifyAccountHandler from "../../components/verifyAccountHandler/verifyAccountHandler";
 
 const updateStyle = {
   backgroundColor: "#008092",
@@ -25,16 +24,16 @@ const updateStyle = {
   }
 }
 
-const changePasswordStyle = {
-  border:"1px solid #008092",
-  color: "#008092",
-  borderRadius: "10px",
-  padding: "12px",
-  "&:hover":{
-    opacity:0.9,
-    color:"#FFFFF"
-  }
-}
+// const changePasswordStyle = {
+//   border:"1px solid #008092",
+//   color: "#008092",
+//   borderRadius: "10px",
+//   padding: "12px",
+//   "&:hover":{
+//     opacity:0.9,
+//     color:"#FFFFF"
+//   }
+// }
 
 
 const styles = {
@@ -50,13 +49,7 @@ const Info = ({value}) => {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState('');
   const [severity, setSeverity] = useState('');
-
-  const dispatch = useDispatch()
-
-  const disHandler = () => {
-    dispatch(setTimeOutMsg("nawaaaa"))
-  }
-  
+ 
 
   const user = value[0].user
 
@@ -66,11 +59,11 @@ const Info = ({value}) => {
   //formFields db
   const [formFields, setFormFields] = useState(user)
   const {address_one, address_two,phone,state,country} = formFields
-  console.log(formFields)
+
 
   //Get country&states handler
   const countries = Country.getAllCountries()
-  const getStates = State.getStatesOfCountry(country)
+  const getStates = State.getStatesOfCountry(country.toUpperCase())
 
   //Update func 
   const updateHandler = async(e) => {
@@ -84,7 +77,6 @@ const Info = ({value}) => {
       setSeverity("success")
       setOpen(true)
     }catch(err){
-        console.log(err)
         setText("An Error Occured")
         setSeverity("error")
         setOpen(true)
@@ -213,12 +205,12 @@ const Info = ({value}) => {
               size='medium'
               label="Country"
               name='country'
-              value={country}
+              value={country.toLocaleUpperCase()}
               onChange={handleChange}
               helperText="Please select your country"
             >
               {countries.map((country) => (
-                <MenuItem key={country.isoCode} value={country.isoCode} name='country'>
+                <MenuItem key={country.isoCode} value={country.isoCode.toLocaleUpperCase()} name='country'>
                 {country.name}
                 </MenuItem>
               ))}
@@ -230,12 +222,12 @@ const Info = ({value}) => {
               size='medium'
               label="State"
               name='state'
-              value={state}
+              value={state.toLocaleUpperCase()}
               onChange={handleChange}
               helperText="Please select your state"
             >
               {getStates.map((state) => (
-                <MenuItem key={state.isoCode} value={state.isoCode} name='country'>
+                <MenuItem key={state.isoCode} value={state.isoCode.toLocaleUpperCase()} name='country'>
                 {state.name}
                 </MenuItem>
               ))}
@@ -243,7 +235,7 @@ const Info = ({value}) => {
 
                   <div className="flex justify-start items-center gap-6">
                     <Buttons style={updateStyle} variant="contained" text="Update Information" onClick={updateHandler} />
-                    <Buttons style={changePasswordStyle} variant="outlined" text="Change Password"  onClick={disHandler}/>
+                    <VerifyAccountHandler />
                   </div>
                 </form>
               </div>

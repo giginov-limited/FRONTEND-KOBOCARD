@@ -1,26 +1,20 @@
 import React from 'react'
-import { useGetUserDetailsQuery } from '../../app/api/authApiSlice';
 import AllCardGames from '../../components/Game/dashboardGames/AllKardGames';
-import Loading from '../../components/Loading/Loading.Component';
 import bet from '../../assets/bet.jpg'
 import bett from '../../assets/bett.svg'
+import { useSelector } from 'react-redux';
 
 
 const Dashboard = () => {
-  const {data, isLoading, isError, error, isSuccess,refetch} = useGetUserDetailsQuery();
+  const {user} = useSelector((state) => state.auth )
 
-  
-  let content = (isLoading)?
-  <Loading />:
-  (isSuccess)?(
-    <div className='py-2 md:py-4 flex justify-start'>
-      <h2 className='text-lg md:text-4xl font-bold uppercase'>Welcome {data.user.first_name}</h2>
-    </div>
-  ):refetch();
+
 
   return (
     <div className='font-inter py-12 w-11/12 md:w-9/12 mx-auto'>
-    {content}
+      <div className='py-2 md:py-4 flex justify-start'>
+      <h2 className='text-lg md:text-4xl font-bold uppercase'>Welcome {user.first_name}</h2>
+    </div>
     <p className='italic text-sm md:text-lg font-extralight text-left '>Good Morning, Remember play a quick game</p>
 
     <div

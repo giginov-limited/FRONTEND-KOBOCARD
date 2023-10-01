@@ -109,15 +109,10 @@ const SignInWithPhoneNumber = () => {
           dispatch(setCredits({...userData}))
           resetFormfields();
           navigateToWelcomePage();
-      }catch(err) {
-        if(err?.data){
-          setOpen(true)
-          setErrMsg(err.data.error.Message)
-        }if(!err?.data){
-          setOpen(true)
-          setErrMsg(err.status)
-        }
-      }
+      } catch ({data}) {
+        setOpen(true)
+        setErrMsg(data.error.Detail ? data.error.Detail : data.error.Message)
+    }
   }
 
   //Onchange handler

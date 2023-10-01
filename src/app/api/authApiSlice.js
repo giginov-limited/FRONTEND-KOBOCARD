@@ -101,6 +101,18 @@ export const authApiSlice = signInApi.injectEndpoints({
             }),
             invalidatesTags:['User-Details']
         }),
+        generateOtp: builder.mutation({
+            query: () => ({
+                url: "/users/generatePhoneOtp",
+                method: "POST",
+            })
+        }),
+        validateOtp: builder.mutation({
+            query: (OTP) => ({
+                url: `/users/validatePhoneOtp/${OTP}`,
+                method: 'POST',
+            })
+        }),
     })
 })
 
@@ -118,4 +130,6 @@ export const {
     useGetUserGamesQuery,
     useFundWalltetMutation,
     useResetPasswordMutation,
+    useGenerateOtpMutation,
+    useValidateOtpMutation,
 } = authApiSlice
