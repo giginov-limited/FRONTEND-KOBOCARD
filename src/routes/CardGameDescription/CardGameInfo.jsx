@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Countdown from "../../components/countDown/countdown";
 import Loading from "../../components/Loading/Loading.Component";
 import Buttons from "../../components/Button";
+import { Skeleton } from "@mui/material";
 
 const style = {
     backgroundColor:"#008092",
@@ -23,18 +24,19 @@ const Info = (props) => {
     const navigateToPayHandler = () =>{
         navigate(`/Pay/:${id}`)
     }
+    console.log(game)
 
     return(
        <>
        <div className="font-inter">
         <h2 className="text-3xl font-semibold py-4">Card Game Desciption</h2>
-        <div className="w-[90%] md:w-10/12 mx-auto flex flex-col md:flex-row gap-6 md:gap-12 py-10">
+        <div className="w-[90%] max-h-[90vh] md:w-10/12 mx-auto flex flex-col md:flex-row gap-6 md:gap-12 py-10">
             <div className="w-full mx-auto md:w-full">
-               <img src="https://images.unsplash.com/photo-1584936684506-c3a7086e8212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80" className="w-full h-[172px] object-cover md:max-w-[590px] md:h-[509px]" alt="pic" />
+                {game.image?(<img src={game.image} className="w-full h-[172px] object-cover md:max-w-[590px] md:h-[509px]" alt="pic" />):(<Skeleton variant="rounded" width={210} height={60} />)}
             </div>
             <div>
                 <p className="text-4xl font-bold text-left">{game.title}</p>
-                <p className="text-sm md:text-xl font-light leading-10 text-left max-w-[617px] my-4 md:my-12">{game.description}</p>
+                <p className="text-sm md:text-xl font-light leading-10 text-left max-w-[617px] my-4 md:my-12 truncate whitespace-nowrap">{game.description}</p>
 
                 <div className="flex justify-center my-4 gap-10"> 
                 <div className='w-full text-xs md:text-base md:w-[246px] flex flex-col justify-evenly p-1 font-inter shadow-md rounded'>

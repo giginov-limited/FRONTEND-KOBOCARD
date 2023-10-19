@@ -66,10 +66,10 @@ const Navigation =() => {
         }
       </div>
     </div>
-    <div className='block justify-self-end md:hidden'>
-    <SwipeableTemporaryDrawer user={user} />
-    </div>
-  </div>
+      <div className='block justify-self-end md:hidden'>
+        <SwipeableTemporaryDrawer user={user} />
+        </div>
+      </div>
       <Outlet />
    </Fragment>
   )

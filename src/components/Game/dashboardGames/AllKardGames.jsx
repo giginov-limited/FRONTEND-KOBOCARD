@@ -27,7 +27,8 @@ const moreInfoStyle =  {
 
 
 const AllCardGames = () => {
-    const {data, isLoading,isSuccess,isError} = useGetAllCardGamesQuery();
+    const {data, isLoading,isSuccess} = useGetAllCardGamesQuery();
+    console.log(data)
     const navigate = useNavigate()
 
     const navigateToCardsHandler = (id) =>{
@@ -48,7 +49,7 @@ const AllCardGames = () => {
         return(
               <div className='flex items-start justify-evenly md:items-center gap-8 rounded my-5 py-6 px-3 w-full shadow-lg' key= {game.id}>
               <div className='flex flex-col '>
-              <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src="https://images.unsplash.com/photo-1584936684506-c3a7086e8212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80" alt="pic" />
+              <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src={game.image} alt="pic" />
               <div className='bg-btn-bg w-full block md:hidden'>
                 <span className='text-sm md:text-2xl font-bold mt-2 text-white '>&#8358;{game.price}</span>    
              </div>

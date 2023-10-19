@@ -40,8 +40,8 @@ const Wallet = ({wallet}) =>{
             {
                 "amount": "20000"
            }
-        // let id = user_id
-        // Post({id,'picture_url':"https://res.cloudinary.com/kobocard/image/upload/v1662022505/z4pcf8hhdpt0l6dlauz4.jpg"}) 
+        let id = user_id
+        Post({id,'picture_url':"https://res.cloudinary.com/kobocard/image/upload/v1662022505/z4pcf8hhdpt0l6dlauz4.jpg"}) 
         alert("Thanks for doing business with us! Come back soon!!")
       },
       onClose: () => alert("Wait! Don't leave :("),
@@ -98,13 +98,13 @@ const Wallet = ({wallet}) =>{
                         <img src={paystack} alt="" />
                         <div className="h-[27px] w-[27px] rounded-full bg-paystack-btn"></div>
                     </button>
-                {/* <label htmlFor='number' className="text-base">Amount:</label>
+                <label htmlFor='number' className="text-base">Amount:</label>
                 <input 
                 type='number'
                 onChange={onChange}
                 className='w-44'
                 ></input>
-                <PaystackButton {...componentProps} /> */}
+                <PaystackButton {...componentProps} /> 
                 </div> 
             </div>
         </div>
@@ -117,7 +117,7 @@ const Wallet = ({wallet}) =>{
 }
 
 const UserWallet  = () => {
-    const {data, isLoading, isSuccess,isError,error} = useGetUserWalletDetailsQuery()
+    const {data, isLoading, isSuccess, error} = useGetUserWalletDetailsQuery()
 
     let content = isLoading?<Loading />:
     (isSuccess)?<Wallet {...data}/>:console.log(error)
