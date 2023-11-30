@@ -40,8 +40,6 @@ const OngoingCardGames = () =>{
 
   const {data , isLoading, isSuccess} = useGetAllCardGamesPerPageQuery(gamesQueryParams)
 
-  // const {data,isLoading,isSuccess} = useGetAllCardGamesQuery()
-  
   
   const navigate = useNavigate()
 

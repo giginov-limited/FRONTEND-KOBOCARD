@@ -39,7 +39,7 @@ export const authApiSlice = signInApi.injectEndpoints({
         }),
         GetUserGamesPerPage: builder.query({
             query: (props) => ({
-                url: `/getUserGamesPerPage?page=${props.currentPage}&perPage=${props.itemsPerPage}`,
+                url: `/users/getUserGamesPerPage?page=${props.currentPage}&perPage=${props.itemsPerPage}`,
                 method: 'GET',
                 providesTags: ['User-Details']
             })
@@ -100,6 +100,12 @@ export const authApiSlice = signInApi.injectEndpoints({
                 method: 'GET',
             })
         }),
+        GetLastestGame: builder.query({
+            query: () => ({
+                url:`/users/getLatestGame`,
+                method: 'GET',
+            })
+        }),
         PayCardGamesById: builder.mutation({
             query: (id) => ({
                 url: `/users/payForGame/${id}`,
@@ -147,4 +153,5 @@ export const {
     useValidateOtpMutation,
     useGetAllCardGamesPerPageQuery,
     useGetUserGamesPerPageQuery,
+    useGetLastestGameQuery
 } = authApiSlice
