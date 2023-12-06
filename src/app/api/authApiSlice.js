@@ -87,6 +87,12 @@ export const authApiSlice = signInApi.injectEndpoints({
                 providesTags: ['Games']
             })
         }),
+        GetAllCardGamesByName: builder.query({
+            query: (props) => ({
+                url: `/users/searchGame?title=${props.title}&page=${props.currentPage}&perPage=${props.itemsPerPage}`,
+                method: 'GET',
+            })
+        }),
         GetAllCardGamesPerPage: builder.query({
             query: (props) => ({
                 url:`/users/getOngoingGamesPerPage?page=${props.currentPage}&perPage=${props.itemsPerPage}`,
@@ -132,6 +138,12 @@ export const authApiSlice = signInApi.injectEndpoints({
                 method: 'POST',
             })
         }),
+        searchGameByName: builder.query({
+            query: (props) => ({
+                url: `/users/searchGame?title=${props.title}&page=${props.currentPage}&perPage=${props.itemsPerPage}`,
+                method: 'GET',
+            })
+        }),
     })
 })
 
@@ -153,5 +165,6 @@ export const {
     useValidateOtpMutation,
     useGetAllCardGamesPerPageQuery,
     useGetUserGamesPerPageQuery,
-    useGetLastestGameQuery
+    useGetLastestGameQuery,
+    useGetAllCardGamesByNameQuery,
 } = authApiSlice
