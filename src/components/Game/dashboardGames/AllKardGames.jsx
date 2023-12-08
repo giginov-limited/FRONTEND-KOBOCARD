@@ -1,6 +1,6 @@
 import { useGetAllCardGamesByNameQuery, useGetAllCardGamesPerPageQuery,  } from '../../../app/api/authApiSlice';
 import { useState } from 'react';
-import { Pagination } from '@mui/material';
+import { Pagination, TextField } from '@mui/material';
 import Countdown from '../../countDown/countdown';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../Loading/Loading.Component';
@@ -214,7 +214,7 @@ const AllCardGames = () => {
   return (
     <div className='flex flex-col justify-center items-center px-5'>
       <div className='flex justify-start items-center gap-4'>
-        <textarea value={title} type={"text"} onChange={e => setTitle(e.target.value)} />
+        <TextField value={title} type={"text"} variant='outlined' onChange={e => setTitle(e.target.value)} />
         <Buttons variant='contained' style={btnStyles} text="Search Game" size='large' onClick={(e) => { setSearchGamesBool(true) }} />
       </div>
 
