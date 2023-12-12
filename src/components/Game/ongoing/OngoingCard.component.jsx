@@ -30,7 +30,7 @@ const playNowStyle =  {
 const OngoingCardGames = () =>{
   const gamesQueryParams = {
     currentPage:1,
-    itemsPerPage:5
+    itemsPerPage:3
   }
   const [queryParams, setQueryParams] = useState(gamesQueryParams)
   //HandleChange function for the pagination component
@@ -38,7 +38,8 @@ const OngoingCardGames = () =>{
       setQueryParams({...queryParams,currentPage: p,})
   }
 
-  const {data , isLoading, isSuccess} = useGetAllCardGamesPerPageQuery(gamesQueryParams)
+  const {data , isLoading, isSuccess} = useGetAllCardGamesPerPageQuery(queryParams)
+  console.log(queryParams)
 
   
   const navigate = useNavigate()
@@ -75,7 +76,7 @@ const OngoingCardGames = () =>{
         })
       }
       </div>
-      <Pagination count={Math.ceil(data.totalCount / 5)} size='medium' page={queryParams.currentPage} color='primary' onChange={handleChange}/>
+      <Pagination count={Math.ceil(data.totalCount / 3)} size='medium' page={queryParams.currentPage} color='primary' onChange={handleChange}/>
     </div>:  
     <div className='flex justify-center items-center '>
       <img src={noGamesIcon} alt='noGamesIcon' className='object-cover max-w-[470] h-full max-h-[359px] '/>

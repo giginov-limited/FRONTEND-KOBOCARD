@@ -24,10 +24,12 @@ const Info = (props) => {
     const navigateToPayHandler = () =>{
         navigate(`/Pay/:${id}`)
     }
-    console.log(game)
+
+    const timeEnd = Number(game.end_time + '000');
+    const startEnd = Number(game.start_time + '000');
 
     return(
-       <>
+       <div>
        <div className="font-inter">
         <h2 className="text-3xl font-semibold py-4">Card Game Desciption</h2>
         <div className="w-[90%] max-h-[90vh] md:w-10/12 mx-auto flex flex-col md:flex-row gap-6 md:gap-12 py-10">
@@ -41,9 +43,9 @@ const Info = (props) => {
                 <div className="flex justify-center my-4 gap-10"> 
                 <div className='w-full text-xs md:text-base md:w-[246px] flex flex-col justify-evenly p-1 font-inter shadow-md rounded'>
                 <span>Card game starts</span>
-                 <Countdown CountdownTimestampMs={game.start_time} />
+                 <Countdown CountdownTimestampMs={startEnd} />
                  <span> game ends</span>
-                 <Countdown CountdownTimestampMs={game.end_time} />
+                 <Countdown CountdownTimestampMs={timeEnd} />
                  </div>
 
              <div className='w-ful md:w-[246px] flex flex-col justify-between px-1 py-2 gap-4 md:gap-12 font-inter shadow-md rounded'>
@@ -59,7 +61,7 @@ const Info = (props) => {
             </div>
         </div>
        </div>
-       </>
+       </div>
     )
 }
 
@@ -72,7 +74,7 @@ const CardDescription = () => {
     let kardContent = 
     isLoading?<Loading />:
     isSuccess? <Info {...data} id={id}/>:
-    isError?<p>{error}</p>:null;
+    isError?<p>An error occured..</p>:null;
 
     return kardContent
 }

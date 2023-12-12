@@ -22,7 +22,7 @@ export function getRemainingTimeUntilMsTimestamp(timestampMs){
 
 function getRemainingSeconds(nowDayjs, timestampDayjs) {
     const seconds = timestampDayjs.diff(nowDayjs, 'seconds') % 60;
-    return padWithZeros(seconds , 2);
+    return seconds
 }
 function getRemainingMinutes(nowDayjs, timestampDayjs) {
     const minutes = timestampDayjs.diff(nowDayjs, 'minutes') % 60;

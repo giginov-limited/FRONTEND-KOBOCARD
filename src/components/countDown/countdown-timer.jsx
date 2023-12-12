@@ -65,7 +65,7 @@ const CountDownComponent = () => {
   const { data, isLoading, isSuccess, error } = useGetLastestGameQuery()
   let content =
     isLoading ? <Loading /> :
-      isSuccess ? <CountdownTimer CountdownTimestampMs={(data.game.start_time * 1000)} /> :
+      isSuccess ? <CountdownTimer CountdownTimestampMs={(Number(data.game.end_time + '000'))} /> :
         <h2>An error occured</h2>
 
   return (

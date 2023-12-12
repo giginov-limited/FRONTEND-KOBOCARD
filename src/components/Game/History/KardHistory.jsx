@@ -4,15 +4,18 @@ import Loading from "../../Loading/Loading.Component"
 // import usePagination from "./pageee"
 import Pagination from "@mui/material/Pagination";
 import ticket from "../../../assets/ticket.svg"
+import emptyImage from "../../../assets/empty-image.jpg"
+import { useNavigate } from "react-router-dom";
 
 
 
 
 const KardDetails = ({ value }) => {
+    const navigate = useNavigate()
     const content = value.map((game, index) => {
         return (
             <div key={index} className="md:py-6 py-2 md:px-16 flex justify-between rounded-xl shadow-lg">
-                <img src={game.image} alt={game.title} className="w-[274] h-[202] rounded-md shadow-lg" />
+                <img src={game.image? game.image : emptyImage} alt={game.title} className="w-[274px] h-[202px] object-cover rounded-md shadow-lg" />
                 <div className="hidden text-center md:flex flex-col justify-around max-w-[230px]">
                     <span className="underline text-lg">Brief Description</span>
                     <span className="text-gray-400 ">{game.description.slice(0, 60) + "..."}</span>
@@ -30,7 +33,7 @@ const KardDetails = ({ value }) => {
                         <span className="border-r border-black text-xsm md:text-xs p-1">status</span>
                         <span className="text-xsm md:text-xs p-1 text-green-700">{game.status}</span>
                     </div>
-                    <button className="bg-More-info-btn text-xs p-1 w-[120px] text-white rounded-full">
+                    <button className="bg-More-info-btn text-xs p-1 w-[120px] text-white rounded-full" onClick={()=>{ navigate(`/card/:${game.id}`)}}>
                         More info
                     </button>
                 </div>
