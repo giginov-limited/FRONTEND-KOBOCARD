@@ -5,6 +5,7 @@ import Countdown from "../../components/countDown/countdown";
 import Loading from "../../components/Loading/Loading.Component";
 import Buttons from "../../components/Button";
 import { Skeleton } from "@mui/material";
+import emptyImage from "../../assets/empty-image.jpg"
 
 const style = {
     backgroundColor:"#008092",
@@ -34,7 +35,7 @@ const Info = (props) => {
         <h2 className="text-3xl font-semibold py-4">Card Game Desciption</h2>
         <div className="w-[90%] max-h-[90vh] md:w-10/12 mx-auto flex flex-col md:flex-row gap-6 md:gap-12 py-10">
             <div className="w-full mx-auto md:w-full">
-                {game.image?(<img src={game.image} className="w-full h-[172px] object-cover md:max-w-[590px] md:h-[509px]" alt="pic" />):(<Skeleton variant="rounded" width={210} height={60} />)}
+                {game.image?(<img src={game.image ? game.image : emptyImage } className="w-full h-[172px] object-cover md:max-w-[590px] md:h-[509px]" alt="pic" />):(<Skeleton variant="rounded" width={210} height={60} />)}
             </div>
             <div>
                 <p className="text-4xl font-bold text-left">{game.title}</p>

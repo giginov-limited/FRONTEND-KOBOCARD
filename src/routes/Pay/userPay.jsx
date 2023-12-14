@@ -5,6 +5,7 @@ import Loading from "../../components/Loading/Loading.Component";
 import TransitionsModal from "../../components/Modal";
 import Notifications from "../../components/Notification";
 import Buttons from "../../components/Button";
+import emptyImage from "../../assets/empty-image.jpg"
 
 
 const Details = ({value, refetch}) =>{
@@ -61,7 +62,7 @@ const Details = ({value, refetch}) =>{
     <div className="flex flex-col md:flex-row justify-start gap-12 h-[590px]">
     <img
     className="w-[590px] h-[590px] shadow-2xl rounded-sm"
-    src={data.game.image}  alt="pic" />
+    src={data.game.image ? data.game.image : emptyImage }  alt="pic" />
         <div className="h-full w-full flex flex-col justify-center items-start gap-4">
             <p className="text-lg font-semibold">Card title: <span className="text-lg  font-normal">{data.game.title}</span></p>
             <p className="text-lg font-semibold">Card Status: <span  className="text-lg text-register-btn  font-normal">{data.game.status}</span></p>
