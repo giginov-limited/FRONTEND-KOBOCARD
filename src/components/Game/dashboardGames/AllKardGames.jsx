@@ -5,6 +5,7 @@ import Countdown from '../../countDown/countdown';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../Loading/Loading.Component';
 import Buttons from '../../Button';
+import emptyImage from '../../../assets/empty-image.jpg'
 
 const moreInfoStyle = {
   background: "#828282",
@@ -69,7 +70,7 @@ const RenderAllCardGames = () => {
           return (
             <div className='flex items-start justify-evenly md:items-center gap-8 rounded my-5 py-6 px-3 w-full shadow-lg' key={game.id}>
               <div className='flex flex-col '>
-                <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src={game.image} alt="pic" />
+                <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src={game.image ? game.image : emptyImage } alt="pic" />
                 <div className='bg-btn-bg w-full block md:hidden'>
                   <span className='text-sm md:text-2xl font-bold mt-2 text-white '>&#8358;{game.price}</span>
                 </div>
@@ -120,20 +121,8 @@ const RenderAllCardGames = () => {
 }
 
 
-const RenderAllUserSearchGames = ({ title }) => {
-  const gamesQueryParams = {
-    title: title,
-    currentPage: 1,
-    itemsPerPage: 5
-  }
-  const [queryParams, setQueryParams] = useState(gamesQueryParams)
-  //HandleChange function for the pagination component
-  const handleChange = (e, p) => {
-    setQueryParams({ ...queryParams, currentPage: p, })
-  }
+const RenderAllUserSearchGames = ({data, isLoading, isSuccess,handleChange, queryParams }) => {
 
-  const { data, isLoading, isSuccess } = useGetAllCardGamesByNameQuery(queryParams)
-  console.log(data)
   const navigate = useNavigate()
 
   const navigateToCardsHandler = (id) => {
@@ -207,19 +196,31 @@ const RenderAllUserSearchGames = ({ title }) => {
 
 
 const AllCardGames = () => {
-  const [title, setTitle] = useState('')
   const [searchGamesBool, setSearchGamesBool] = useState(false)
+
+  const gamesQueryParams = {
+    title: '',
+    currentPage: 1,
+    itemsPerPage: 5
+  }
+  const [queryParams, setQueryParams] = useState(gamesQueryParams)
+  //HandleChange function for the pagination component
+  const handleChange = (e, p) => {
+    setQueryParams({ ...queryParams, currentPage: p, })
+  }
+
+  const { data, isLoading, isSuccess, error } = useGetAllCardGamesByNameQuery(queryParams)
 
 
   return (
     <div className='flex flex-col justify-center items-center px-5'>
       <div className='flex justify-start items-center gap-4'>
-        <TextField value={title} type={"text"} variant='outlined' onChange={e => setTitle(e.target.value)} />
+        <TextField value={queryParams.title} type={"text"} variant='outlined' onChange={e => setQueryParams({...queryParams, title: e.target.value})}/>
         <Buttons variant='contained' style={btnStyles} text="Search Game" size='large' onClick={(e) => { setSearchGamesBool(true) }} />
       </div>
 
       <div>
-        {searchGamesBool && title ? <RenderAllUserSearchGames title={title} /> : <RenderAllCardGames />}
+        {searchGamesBool || queryParams.title ? <RenderAllUserSearchGames data={data} isLoading={isLoading} isSuccess={isSuccess} error={error} handleChange={handleChange} queryParams={queryParams}/> : <RenderAllCardGames />}
       </div>
     </div>
   )
