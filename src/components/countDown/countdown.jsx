@@ -16,7 +16,7 @@ const Countdown = ({CountdownTimestampMs}) =>{
         useEffect(() => {
           const intervalid = setInterval(()=>{
               updateRemainingTime(CountdownTimestampMs)
-          }, 1000)
+          }, 3000)
     
           return () => clearInterval(intervalid);
         }, [CountdownTimestampMs])

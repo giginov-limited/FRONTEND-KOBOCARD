@@ -1,4 +1,4 @@
-import {Outlet , useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useLoginWithPhoneNumberMutation } from '../../app/api/authApiSlice';
 import { setCredits } from '../../features/authSlice';
 import { useDispatch} from 'react-redux/es/exports';
@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import Buttons from '../Button';
 import Loading from '../Loading/Loading.Component';
 import Notifications from '../Notification';
+import { errorHandler } from '../../utils/errorHandler';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -109,9 +110,9 @@ const SignInWithPhoneNumber = () => {
           dispatch(setCredits({...userData}))
           resetFormfields();
           navigateToWelcomePage();
-      } catch ({data}) {
+      } catch (err) {
         setOpen(true)
-        setErrMsg(data.error.Detail ? data.error.Detail : data.error.Message)
+        setErrMsg(errorHandler(err))
     }
   }
 

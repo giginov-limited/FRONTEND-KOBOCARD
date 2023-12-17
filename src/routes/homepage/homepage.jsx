@@ -3,6 +3,7 @@ import CountdownTimer from '../../components/countDown/countdown-timer';
 import OngoingCardGames from '../../components/Game/ongoing/OngoingCard.component';
 import pic from '../../assets/home.jpg'
 import Buttons from '../../components/Button';
+import CountDownComponent from '../../components/countDown/countdown-timer';
 
 const btnStyles = {
   color:"#FFF",
@@ -43,7 +44,7 @@ const Home = () => {
       </div>
     <OngoingCardGames />
     
-    <CountdownTimer CountdownTimestampMs={1678596160000}/>
+    <CountDownComponent/>
     </div>
   )
 }

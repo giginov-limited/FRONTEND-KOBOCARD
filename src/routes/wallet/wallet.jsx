@@ -4,6 +4,7 @@ import Loading from "../../components/Loading/Loading.Component";
 import { PaystackButton } from "react-paystack";
 import paystack from "../../assets/paystack.svg"
 import { useState } from "react";
+import { TextField } from "@mui/material";
 
 const Wallet = ({wallet}) =>{
     const [fund] = useFundWalltetMutation()
@@ -99,11 +100,7 @@ const Wallet = ({wallet}) =>{
                         <div className="h-[27px] w-[27px] rounded-full bg-paystack-btn"></div>
                     </button>
                 <label htmlFor='number' className="text-base">Amount:</label>
-                <input 
-                type='number'
-                onChange={onChange}
-                className='w-44'
-                ></input>
+                <TextField variant="standard" value={amount} onChange={onChange} type='number' />
                 <PaystackButton {...componentProps} /> 
                 </div> 
             </div>

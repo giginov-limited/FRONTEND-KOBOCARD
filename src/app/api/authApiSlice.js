@@ -23,7 +23,6 @@ export const authApiSlice = signInApi.injectEndpoints({
                 body: { ...credentials }
             })
         }),
-        //endPoint to get user details using the endPoint
         GetUserDetails: builder.query({
             query: () => ({
                 url: '/users/getUser',
@@ -34,6 +33,13 @@ export const authApiSlice = signInApi.injectEndpoints({
         GetUserGames: builder.query({
             query: () => ({
                 url: '/users/getUserGames',
+                method: 'GET',
+                providesTags: ['User-Details']
+            })
+        }),
+        GetUserGamesPerPage: builder.query({
+            query: (props) => ({
+                url: `/users/getUserGamesPerPage?page=${props.currentPage}&perPage=${props.itemsPerPage}`,
                 method: 'GET',
                 providesTags: ['User-Details']
             })
@@ -81,9 +87,28 @@ export const authApiSlice = signInApi.injectEndpoints({
                 providesTags: ['Games']
             })
         }),
+        GetAllCardGamesByName: builder.query({
+            query: (props) => ({
+                url: `/users/searchGame?title=${props.title}&page=${props.currentPage}&perPage=${props.itemsPerPage}`,
+                method: 'GET',
+            })
+        }),
+        GetAllCardGamesPerPage: builder.query({
+            query: (props) => ({
+                url:`/users/getOngoingGamesPerPage?page=${props.currentPage}&perPage=${props.itemsPerPage}`,
+                method: 'GET',
+                providesTags: ['Games']
+            })
+        }),
         GetCardGamesById: builder.query({
             query: (id) => ({
                 url:`/users/getGameById/${id}`,
+                method: 'GET',
+            })
+        }),
+        GetLastestGame: builder.query({
+            query: () => ({
+                url:`/users/getLatestGame`,
                 method: 'GET',
             })
         }),
@@ -113,6 +138,12 @@ export const authApiSlice = signInApi.injectEndpoints({
                 method: 'POST',
             })
         }),
+        searchGameByName: builder.query({
+            query: (props) => ({
+                url: `/users/searchGame?title=${props.title}&page=${props.currentPage}&perPage=${props.itemsPerPage}`,
+                method: 'GET',
+            })
+        }),
     })
 })
 
@@ -132,4 +163,8 @@ export const {
     useResetPasswordMutation,
     useGenerateOtpMutation,
     useValidateOtpMutation,
+    useGetAllCardGamesPerPageQuery,
+    useGetUserGamesPerPageQuery,
+    useGetLastestGameQuery,
+    useGetAllCardGamesByNameQuery,
 } = authApiSlice
