@@ -135,7 +135,6 @@ const RenderAllUserSearchGames = ({ data, isLoading, isSuccess, handleChange, qu
     navigate(`/Pay/:${id}`)
   }
 
-  console.log(data.games.lenght)
 
   let content = isLoading ? <Loading /> :
     isSuccess ? (data.games && data.games.length > 0 ?
