@@ -39,7 +39,6 @@ const OngoingCardGames = () =>{
   }
 
   const {data , isLoading, isSuccess} = useGetAllCardGamesPerPageQuery(queryParams)
-  console.log(queryParams)
 
   
   const navigate = useNavigate()
@@ -78,18 +77,18 @@ const OngoingCardGames = () =>{
       </div>
       <Pagination count={Math.ceil(data.totalCount / 3)} size='medium' page={queryParams.currentPage} color='primary' onChange={handleChange}/>
     </div>:  
-    <div className='flex justify-center items-center '>
+    <div className='flex justify-center items-center flex-col md:flex-row '>
       <img src={noGamesIcon} alt='noGamesIcon' className='object-cover max-w-[470] h-full max-h-[359px] '/>
-      <div className='self-center text-left font-inter font-semibold text-4xl text-white'>
+      <div className='self-center text-left font-inter font-semibold text-lg md:text-4xl  text-white'>
         <p>Ooops!!</p>
         <p>No Ongoing Games.</p>
         <p>Please check back...</p>
       </div>
     </div>)
 
- : <div className='flex justify-center items-center '>
+ : <div className='flex justify-center items-center flex-col md:flex-row '>
     <img src={noGamesIcon} alt='noGamesIcon' className='object-cover max-w-[470] h-full max-h-[359px] '/>
-    <div className='self-center text-left font-inter font-semibold text-4xl text-white'>
+    <div className='w-full mx-auto self-center text-left font-inter font-semibold text-lg md:text-4xl  text-white'>
       <p>Ooops!!</p>
       <p>There's something wrong with your network.</p>
       <p>Please check back...</p>
@@ -107,5 +106,3 @@ const OngoingCardGames = () =>{
 }
 
 export default OngoingCardGames;
-
-//        <div className='grid grid-cols-2 md:grid-cols-3 items-center gap-4 md:gap-36 md:space-y-4 justify-items-center px-1 py-4 md:p-5'>

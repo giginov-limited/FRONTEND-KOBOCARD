@@ -1,4 +1,4 @@
-import { useGetAllCardGamesByNameQuery, useGetAllCardGamesPerPageQuery,  } from '../../../app/api/authApiSlice';
+import { useGetAllCardGamesByNameQuery, useGetAllCardGamesPerPageQuery, } from '../../../app/api/authApiSlice';
 import { useState } from 'react';
 import { Pagination, TextField } from '@mui/material';
 import Countdown from '../../countDown/countdown';
@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../../Loading/Loading.Component';
 import Buttons from '../../Button';
 import emptyImage from '../../../assets/empty-image.jpg'
+import ErrorHandlerComponent from '../../../utils/errorHandlerComponent';
+import searchNotFoundImage from '../../../assets/search.png'
 
 const moreInfoStyle = {
   background: "#828282",
@@ -49,8 +51,7 @@ const RenderAllCardGames = () => {
     setQueryParams({ ...queryParams, currentPage: p, })
   }
 
-  const { data, isLoading, isSuccess } = useGetAllCardGamesPerPageQuery(queryParams)
-  console.log(data)
+  const { data, isLoading, isSuccess, error } = useGetAllCardGamesPerPageQuery(queryParams)
   const navigate = useNavigate()
 
   const navigateToCardsHandler = (id) => {
@@ -61,7 +62,7 @@ const RenderAllCardGames = () => {
   }
 
   let content = isLoading ? <Loading /> :
-    isSuccess ? (data.games ?
+    isSuccess ? (data.games && data.games.length > 0 ?
       <div>
         {data.games.map((game) => {
           const timeEnd = Number(game.end_time + '000');
@@ -70,7 +71,7 @@ const RenderAllCardGames = () => {
           return (
             <div className='flex items-start justify-evenly md:items-center gap-8 rounded my-5 py-6 px-3 w-full shadow-lg' key={game.id}>
               <div className='flex flex-col '>
-                <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src={game.image ? game.image : emptyImage } alt="pic" />
+                <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src={game.image ? game.image : emptyImage} alt="pic" />
                 <div className='bg-btn-bg w-full block md:hidden'>
                   <span className='text-sm md:text-2xl font-bold mt-2 text-white '>&#8358;{game.price}</span>
                 </div>
@@ -106,9 +107,11 @@ const RenderAllCardGames = () => {
           )
         })}
         <Pagination count={Math.ceil(data.totalCount / 5)} size='medium' page={queryParams.currentPage} color='primary' onChange={handleChange} />
-      </div> :
-      (<h4> No Games</h4>)) :
-      <h5>An Error Occured</h5>
+      </div> : (<div className='flex flex-col gap-4'>
+        <img src={searchNotFoundImage} alt='search-not-found' className='w-[150px] h-auto py-5' />
+        <p className='text-lg font-inter capitalize'>No games...</p>
+      </div>)) :
+      <ErrorHandlerComponent error={error} />
 
 
 
@@ -121,7 +124,7 @@ const RenderAllCardGames = () => {
 }
 
 
-const RenderAllUserSearchGames = ({data, isLoading, isSuccess,handleChange, queryParams }) => {
+const RenderAllUserSearchGames = ({ data, isLoading, isSuccess, handleChange, queryParams, error, isError }) => {
 
   const navigate = useNavigate()
 
@@ -132,8 +135,10 @@ const RenderAllUserSearchGames = ({data, isLoading, isSuccess,handleChange, quer
     navigate(`/Pay/:${id}`)
   }
 
+  console.log(data.games.lenght)
+
   let content = isLoading ? <Loading /> :
-    isSuccess ? (data.games ?
+    isSuccess ? (data.games && data.games.length > 0 ?
       <div>
         {data.games.map((game) => {
           const timeEnd = Number(game.end_time + '000');
@@ -142,7 +147,7 @@ const RenderAllUserSearchGames = ({data, isLoading, isSuccess,handleChange, quer
           return (
             <div className='flex items-start justify-evenly md:items-center gap-8 rounded my-5 py-6 px-3 w-full shadow-lg' key={game.id}>
               <div className='flex flex-col '>
-                <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src={game.image ? game.image : emptyImage } alt="pic" />
+                <img className='h-[150px] w-[120px] md:w-full md:max-h-[159px] object-cover' src={game.image ? game.image : emptyImage} alt="pic" />
                 <div className='bg-btn-bg w-full block md:hidden'>
                   <span className='text-sm md:text-2xl font-bold mt-2 text-white '>&#8358;{game.price}</span>
                 </div>
@@ -179,8 +184,15 @@ const RenderAllUserSearchGames = ({data, isLoading, isSuccess,handleChange, quer
         })}
         <Pagination count={Math.ceil(data.totalCount / 5)} size='medium' page={queryParams.currentPage} color='primary' onChange={handleChange} />
       </div> :
-      (<h4> No Games</h4>)) :
-      <h5>An Error Occured</h5>
+      (<div className='flex flex-col gap-4'>
+        <img src={searchNotFoundImage} alt='search-not-found' className='w-[150px] h-auto py-5' />
+        <p className='text-lg font-inter capitalize'>No games...</p>
+      </div>)) : isError ?
+      <ErrorHandlerComponent error={error} /> :
+      <div className='flex flex-col gap-4'>
+        <img src={searchNotFoundImage} alt='search-not-found' />
+        <p className='text-lg font-inter capitalize'>Search not found...</p>
+      </div>
 
 
 
@@ -209,18 +221,19 @@ const AllCardGames = () => {
     setQueryParams({ ...queryParams, currentPage: p, })
   }
 
-  const { data, isLoading, isSuccess, error } = useGetAllCardGamesByNameQuery(queryParams)
+  const { data, isLoading, isSuccess, error, isError } = useGetAllCardGamesByNameQuery(queryParams)
+
 
 
   return (
     <div className='flex flex-col justify-center items-center px-5'>
       <div className='flex justify-start items-center gap-4'>
-        <TextField value={queryParams.title} type={"text"} variant='outlined' onChange={e => setQueryParams({...queryParams, title: e.target.value})}/>
-        <Buttons variant='contained' style={btnStyles} text="Search Game" size='large' onClick={(e) => { setSearchGamesBool(true) }} />
+        <TextField value={queryParams.title} type={"text"} variant='outlined' onChange={e => setQueryParams({ ...queryParams, title: e.target.value })} />
+        <Buttons variant='contained' style={btnStyles} text="Search Game" size='large' onClick={(e) => { queryParams.title ? setSearchGamesBool(true) : setSearchGamesBool(false) }} />
       </div>
 
       <div>
-        {searchGamesBool || queryParams.title ? <RenderAllUserSearchGames data={data} isLoading={isLoading} isSuccess={isSuccess} error={error} handleChange={handleChange} queryParams={queryParams}/> : <RenderAllCardGames />}
+        {searchGamesBool || queryParams.title ? <RenderAllUserSearchGames data={data} isLoading={isLoading} isSuccess={isSuccess} error={error} isError={isError} handleChange={handleChange} queryParams={queryParams} /> : <RenderAllCardGames />}
       </div>
     </div>
   )

@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import Loading from '../Loading/Loading.Component';
 import Notifications from '../Notification';
 import Buttons from '../Button';
+import { errorHandler } from '../../utils/errorHandler';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -110,9 +111,9 @@ const SignIn = () => {
           dispatch(setCredits({ ...userData }))
           resetFormfields();
           navigateToWelcomePage();
-      } catch ({data}) {
+      } catch (err) {
         setOpen(true)
-        setErrMsg(data.error.Detail ? data.error.Detail : data.error.Message)
+        setErrMsg(errorHandler(err))
     }
   }
 
@@ -137,7 +138,7 @@ const SignIn = () => {
                 </h2>
               </div>
 
-              <div class="inline-flex rounded-md shadow-sm">
+              <div className="inline-flex rounded-md shadow-sm">
                 <Buttons variant="contained" style={signInSwitchBtn} text="Sign In with Email address" />
                 <Buttons variant="outlined" style={signInSwitchBtn2} text="Sign In with Phone Number" onClick={navigateToSignInWithPhoneNumber} />
               </div>

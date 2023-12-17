@@ -62,11 +62,11 @@ const CountdownTimer = ({ CountdownTimestampMs }) => {
 
 
 const CountDownComponent = () => {
-  const { data, isLoading, isSuccess, error } = useGetLastestGameQuery()
+  const { data, isLoading, isSuccess} = useGetLastestGameQuery()
   let content =
     isLoading ? <Loading /> :
       isSuccess ? <CountdownTimer CountdownTimestampMs={(Number(data.game.end_time + '000'))} /> :
-        <h2>An error occured</h2>
+        <CountdownTimer CountdownTimestampMs={Number('000')} />
 
   return (
     <div>{content}</div>
