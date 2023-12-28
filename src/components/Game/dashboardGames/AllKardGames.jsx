@@ -124,7 +124,9 @@ const RenderAllCardGames = () => {
 }
 
 
-const RenderAllUserSearchGames = ({ data, isLoading, isSuccess, handleChange, queryParams, error, isError }) => {
+const RenderAllUserSearchGames = ({ handleChange, queryParams}) => {
+
+  const { data, isLoading, isSuccess, error, isError } = useGetAllCardGamesByNameQuery(queryParams)
 
   const navigate = useNavigate()
 
@@ -208,7 +210,6 @@ const RenderAllUserSearchGames = ({ data, isLoading, isSuccess, handleChange, qu
 
 const AllCardGames = () => {
   const [searchGamesBool, setSearchGamesBool] = useState(false)
-
   const gamesQueryParams = {
     title: '',
     currentPage: 1,
@@ -220,9 +221,6 @@ const AllCardGames = () => {
     setQueryParams({ ...queryParams, currentPage: p, })
   }
 
-  const { data, isLoading, isSuccess, error, isError } = useGetAllCardGamesByNameQuery(queryParams)
-
-
 
   return (
     <div className='flex flex-col justify-center items-center px-5'>
@@ -232,7 +230,7 @@ const AllCardGames = () => {
       </div>
 
       <div>
-        {searchGamesBool || queryParams.title ? <RenderAllUserSearchGames data={data} isLoading={isLoading} isSuccess={isSuccess} error={error} isError={isError} handleChange={handleChange} queryParams={queryParams} /> : <RenderAllCardGames />}
+        {searchGamesBool && queryParams.title ? <RenderAllUserSearchGames handleChange={handleChange} queryParams={queryParams} /> : <RenderAllCardGames />}
       </div>
     </div>
   )
